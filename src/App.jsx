@@ -52,15 +52,15 @@ import GamingInfoCard from "./components/cards/GamingInfoCard";
 import EducationInfoCard from "./components/cards/EducationInfoCard";
 import GameCard from "./components/cards/GameCard";
 // Organizer Login & Register
-import OrganizerRegisterViaEmail from "./components/orgLoginAndRegister/OrganizerRegisterViaEmail";
-import OrganizerRegisterViaEmailOTP from "./components/orgLoginAndRegister/OrganizerRegisterViaEmailOTP";
+import OrganizerRegisterViaEmail from "./components/orgLoginAndregister/OrganizerRegisterViaEmail";
+import OrganizerRegisterViaEmailOTP from "./components/orgLoginAndregister/OrganizerRegisterViaEmailOTP";
 import OrganizerRegisterViaPhone from "./components/orgLoginAndregister/OrganizerRegisterViaPhone";
 import OrganizerRegisterViaPhoneOTP from "./components/orgLoginAndregister/OrganizerRegisterViaPhoneOTP";
 import OrganizerName from "./components/orgLoginAndregister/OrganizerName";
 import OrganizerPasswordSetup from "./components/orgLoginAndregister/OrganizerPasswordSetup";
 import OrganizerLoginViaPhone from "./components/orgLoginAndregister/OrganizerLoginViaPhone";
 import OrganizerLoginViaPhoneOTP from "./components/orgLoginAndregister/OrganizerLoginViaPhoneOTP";
-import OrganizerLoginViaEmail from "./components/orgLoginAndRegister/OrganizerLoginViaEmail";
+import OrganizerLoginViaEmail from "./components/orgLoginAndregister/OrganizerLoginViaEmail";
 import OrganizerLoginViaSign from "./components/orgLoginAndregister/OrganizerLoginViaSign";
 import OrganizerLoginViaSignOTP from "./components/orgLoginAndregister/OrganizerLoginViaSignOTP";
 import OrganizerPersonalInfo from "./components/orgLoginAndregister/OrganizerPersonalInfo";
