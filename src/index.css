@@ -1,0 +1,769 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  @media (min-height: 1024px) {
+    .gap-h-1024 {
+      gap: 2rem; /* Tailwind's gap-8 */
+    }
+    .space-y-h-1024 > * + * {
+      margin-top: 2rem; /* Tailwind's space-y-8 */
+    }
+  }
+}
+* {
+  margin: 0;
+  padding: 0;
+}
+@font-face {
+  font-family: "Arial Rounded MT Bold";
+  src: url("./assets/fonts/arialroundedmtbold.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Agencyfb";
+  src: url("./assets/fonts/agencyfb.woff2");
+}
+@font-face {
+  font-family: "BebasNeue";
+  src: url("./assets/fonts/BebasNeueRegular.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Source_Sans_Pro";
+  src: url("./assets/fonts/SourceSansPro-Semibold.otf") format("opentype");
+  font-weight: 600;
+  font-style: normal;
+}
+
+
+* {
+  cursor: url("");
+}
+
+.page {
+  background-image: url("https://res.cloudinary.com/deg3edza1/image/upload/v1736427009/cbwg9savualjudio405j.png");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  height: 100vh;
+  width: 100vw;
+  margin-bottom: 0px;
+}
+.page-2 {
+  background-image: url("../public/page2.png");
+  background-size: 100% 100%;
+  background-repeat: repeat-y;
+  height: 200vh;
+  width: 100vw;
+}
+.navbar {
+  height: 10%;
+  display: flex;
+  color: white;
+  padding: 10px 20px;
+  flex-direction: column;
+  font-family: "Agencyfb";
+  justify-content: space-around;
+  row-gap: 0px;
+  z-index: 10;
+}
+
+.assemble {
+  height: 48px;
+  font-size: 45px;
+}
+
+.GUI {
+  height: 24px;
+  font-size: 20px;
+}
+
+.sign-in-box {
+  background-color: white;
+  height: 70%;
+  width: 25%;
+  border-radius: 20px;
+  padding: 20px 25px;
+  position: absolute;
+  top: 15%;
+  right: 5%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.container {
+  /* flex-direction: column; */
+  justify-content: flex-start;
+}
+
+.sign-in-box-heading {
+  font-family: "Arial Rounded MT Bold";
+  color: #000;
+  text-align: center;
+  font-size: 21px;
+  font-style: normal;
+}
+.head-text {
+  color: rgba(0, 0, 0, 0.5);
+  text-align: center;
+  font-family: "Arial Rounded MT Bold";
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 150%; /* 30px */
+}
+.input-box {
+  background-color: #f6f6f6;
+  padding: 5px;
+  letter-spacing: 0.64px;
+  font-size: 15px;
+  font-weight: 600;
+  border: none;
+}
+.input-box::placeholder {
+  font-size: 13px;
+  font-weight: 600;
+  color: #000;
+}
+.input-box:focus {
+  outline: none;
+  border: none;
+}
+.input-otp {
+  width: 10%;
+  background-color: #f6f6f6;
+  padding: 5px;
+  letter-spacing: 0.64px;
+  font-size: 15px;
+  font-weight: 600;
+  border: none;
+  text-align: center;
+}
+.input-otp::placeholder {
+  font-size: 13px;
+  font-weight: 600;
+  color: #000;
+}
+.input-otp:focus {
+  outline: none;
+  border: none;
+}
+.check-box {
+  font-weight: bolder;
+  accent-color: #582000;
+}
+.check-box:hover {
+  accent-color: #582000;
+  color: white;
+}
+.check-text-register {
+  color: rgba(0, 0, 0, 0.5);
+  font-family: "Arial Rounded MT Bold";
+  font-size: 12px;
+
+  font-weight: 400;
+  line-height: 115%; /* 18.4px */
+}
+.enter-otp {
+  font-family: "Arial Rounded MT Bold";
+  font-size: 80%;
+}
+.sign-in-button {
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: 8px 0;
+  font-size: small;
+  font-weight: bolder;
+}
+.sign-in-button:hover {
+  background-color: rgba(88, 32, 0, 0.75);
+  color: #fff;
+  transition: 1s;
+}
+.line {
+  border-bottom: 1.5px solid #b2b2b2;
+  margin: 4px;
+}
+.end-text {
+  text-align: center;
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.pubg {
+  height: 25px;
+  width: 50px;
+  background-image: url("./assets/pubg.svg");
+  background-size: 100% 100%;
+}
+.valorant {
+  height: 25px;
+  width: 50px;
+  background-image: url("./assets/valorant.svg");
+  background-size: 100% 100%;
+}
+.coc {
+  height: 25px;
+  width: 50px;
+  background-image: url("./assets/coc.svg");
+  background-size: 100% 100%;
+}
+.cod {
+  height: 25px;
+  width: 50px;
+  background-image: url("./assets/codm.svg");
+  background-size: 100% 100%;
+}
+.pubg:hover {
+  height: 25px;
+  width: 50px;
+  background-image: url("./assets/pubg-brown.svg");
+  background-size: 100% 100%;
+  transition: 1s;
+}
+.cod:hover {
+  height: 25px;
+  width: 50px;
+  background-image: url("./assets/codm-brown.svg");
+  background-size: 100% 100%;
+  transition: 1s;
+}
+.coc:hover {
+  height: 25px;
+  width: 50px;
+  background-image: url("./assets/coc-brown.svg");
+  background-size: 100% 100%;
+  transition: 1s;
+}
+.valorant:hover {
+  height: 25px;
+  width: 50px;
+  background-image: url("./assets/valorant-brown.svg");
+  background-size: 100% 100%;
+  transition: 1s;
+}
+/* footer */
+.footer-list {
+  color: white;
+  display: flex;
+  gap: 60px;
+  padding: 10px;
+  position: absolute;
+  bottom: 5%;
+  list-style-type: none;
+  padding: 0 20px;
+  color: #f6f6f6;
+  font-family: "Bebas Neue", sans-serif;
+  font-weight: 400;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+}
+
+/* Privacy policy */
+.peepee {
+  height: 100vh;
+  width: 100vw;
+  background-image: url("https://res.cloudinary.com/deg3edza1/image/upload/v1736427273/vnh1xrwxolyzedkdjpkd.png");
+  background-size: cover;
+}
+
+.peepee-doc {
+  height: 75vh;
+  width: 25vw;
+  background-color: white;
+  overflow-y: scroll;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 20px;
+  scrollbar-width: none;
+  /* No padding-top to avoid extra space */
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.peepee-doc-heading {
+  position: sticky; /* Makes the heading stick at the top of the container */
+  top: 0; /* Sticks the heading to the top of the container */
+  background-color: white; /* Ensures readability */
+  font-weight: bold;
+  font-size: 28px;
+  text-align: center;
+  color: rgb(0, 0, 0);
+  z-index: 1; /* Ensures it is above other content */
+  padding: 10px 0; /* Adds some padding for better appearance */
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1); /* Optional: Adds a border for separation */
+}
+
+.peepee-doc-content {
+  padding: 20px; /* Adds space for the sticky heading */
+}
+.input-box-contact {
+  background-color: #f6f6f6;
+  padding: 5px;
+  letter-spacing: 0.64px;
+  font-size: 15px;
+  font-weight: 600;
+  border: none;
+}
+.input-box-contact::placeholder {
+  font-size: 13px;
+  font-weight: 600;
+  color: #434242;
+}
+.input-box-contact:focus {
+  outline: none;
+  border: none;
+}
+
+.fifty-five{
+  background-image:  url("../public/Fiftyfive.svg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.Gamingcard{
+    background-image:  url("./assets/cards/GamerCard.svg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+@media (max-width: 1200px) {
+  .sign-in-box {
+    width: 55%;
+  }
+}
+
+/* PASSWORD RECOVERY */
+.pr-page {
+  background-image: url("https://res.cloudinary.com/deg3edza1/image/upload/v1736427648/xwdoeds5fp3pqsyozzut.png");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  height: 100vh;
+  width: 100vw;
+  margin-bottom: 0px;
+}
+.pr-page-1 {
+  background-image: url("https://res.cloudinary.com/deg3edza1/image/upload/v1736427654/uwlyjv2conjuqowprucj.png");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  height: 100vh;
+  width: 100vw;
+  margin-bottom: 0px;
+}
+.pr-container {
+  height: 75%;
+  width: 25%;
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+}
+.pr-top-box {
+  display: flex;
+  justify-content: space-between;
+}
+.forgot-pass {
+  border-radius: 10px;
+  padding: 5px 30px;
+  font-family: "BebasNeue";
+  font-weight: bold;
+  font-size: 18px;
+  margin: 5px;
+}
+
+.pr-bottom-box {
+  background-color: white;
+  height: 50%; /* 80% of the viewport height */
+  width: 100%;
+  border-radius: 20px;
+  padding: 20px 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.pr-box-content {
+  /* font-family: Arial, Helvetica, sans-serif;
+ */
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.5);
+  text-align: center;
+}
+.pass-image {
+  background-image: url("./assets/verifyPass.svg");
+  height: 50%;
+  width: full;
+  background-size: cover;
+}
+/* GAME DASHBOARD */
+.main {
+  height: 100vh;
+  width: 100vw;
+  background-image: url("../public/GD.png");
+  background-size: 100% 100%;
+  font-family: "Agencyfb";
+}
+.right-sidebar {
+  height: 80%;
+  width: 4%;
+  background-image: url("../public/rightsidebar.png");
+  background-size: 100% 100%;
+}
+.left-sidebar {
+  height: 80%;
+  width: 4%;
+  background-image: url("../public/leftsidebar.png");
+  background-size: 100% 100%;
+}
+.t1 {
+  font-family: "Agencyfb";
+}
+
+.pp {
+  height: 100px;
+  width: 100px;
+  background-image: url("../public/image\ upload.png");
+  background-size: cover;
+}
+.plus {
+  height: 20px;
+  width: 20px;
+  background-image: url("../public/basil_add-outline.png");
+  background-size: cover;
+}
+.selector1 {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  opacity: calc(50%);
+}
+.right {
+  height: 200px;
+  width: 200px;
+}
+/* ACCOUNT DETAILS  */
+.main1 {
+  height: 100vh;
+  width: 100vw;
+  background-image: url("../public/sm.png");
+  background-size: 100% 100%;
+  font-family: "Agencyfb";
+}
+.ac {
+  height: 50px;
+  width: 450px;
+  background-image: url(../public/ac.svg);
+  background-size: cover;
+  filter: brightness(100%);
+  /* filter: sepia(50%); */
+}
+.w {
+  height: 30px;
+  width: 35px;
+  background-image: url(../public/w.png);
+  background-size: cover;
+}
+.b {
+  height: 40px;
+  width: 40px;
+  background-image: url(../public/bell.png);
+  background-size: cover;
+}
+.p {
+  height: 40px;
+  width: 40px;
+  background-image: url(../public/image\ upload.png);
+  background-size: cover;
+}
+
+/* HOMEPAGE */
+/* .home-body{
+   height: 100vh;
+   width: 100vw;
+   background-image: url("./assets/image.png");
+   background-color: black ;
+   backdrop-filter: brightness(0%);
+   background-size: cover;
+   font-family: "Agencyfb";
+   font-size: 90%;
+  }
+  .navbar-home{
+    display : flex;
+    justify-content: space-between;
+  }
+  .home-title{
+    height : 100px;
+    width : 400px;
+    background-image: url("../public/Homepage_Title.svg");
+    background-size:100% 100%;
+} */
+
+@layer utilities {
+  .clip-path-navConsole {
+    clip-path: polygon(
+      0% 50%,
+      0% 50%,
+      0.075% 41.89%,
+      0.291% 34.196%,
+      0.638% 27.022%,
+      1.103% 20.471%,
+      1.674% 14.645%,
+      2.34% 9.647%,
+      3.088% 5.581%,
+      3.908% 2.549%,
+      4.787% 0.654%,
+      5.714% 0%,
+      94.286% 0%,
+      94.286% 0%,
+      95.213% 0.654%,
+      96.092% 2.549%,
+      96.912% 5.581%,
+      97.66% 9.647%,
+      98.326% 14.645%,
+      98.897% 20.471%,
+      99.362% 27.022%,
+      99.709% 34.196%,
+      99.925% 41.89%,
+      100% 50%,
+      100% 50%,
+      99.925% 58.11%,
+      99.709% 65.804%,
+      99.362% 72.978%,
+      98.897% 79.529%,
+      98.326% 85.355%,
+      97.66% 90.353%,
+      96.912% 94.419%,
+      96.092% 97.451%,
+      95.213% 99.346%,
+      94.286% 100%,
+      85.597% 100%,
+      82.045% 62.5%,
+      76.2% 62.5%,
+      72.785% 100%,
+      27.321% 100%,
+      23.474% 59.375%,
+      17.628% 59.375%,
+      13.929% 100%,
+      5.714% 100%,
+      5.714% 100%,
+      4.787% 99.346%,
+      3.908% 97.451%,
+      3.088% 94.419%,
+      2.34% 90.353%,
+      1.674% 85.355%,
+      1.103% 79.529%,
+      0.638% 72.978%,
+      0.291% 65.804%,
+      0.075% 58.11%,
+      0% 50%
+    );
+  }
+  .font-bebas {
+    font-family: "BebasNeue";
+    src: url("./assets/fonts/BebasNeueRegular.woff2") format("woff2");
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}
+/* ACCOUNT CENTER */
+.ACMAIN {
+  height: 100vh;
+  width: 100vw;
+  background-image: url("../public/bdragon.png");
+  background-size: cover;
+  background-color: #000000d1;
+  font-family: "Agencyfb";
+}
+.frosted-glass {
+  background-color: rgba(0, 0, 0, 0.55); /* Transparent white */
+  backdrop-filter: blur(1px); /* Frosted glass effect */
+  -webkit-backdrop-filter: blur(10px); /* For Safari */
+  border: 1px solid rgba(255, 255, 255, 0.0); /* Border to enhance the effect */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional: for a subtle shadow */
+  opacity: calc(100%);
+}
+.AC-head-text {
+  font-family: "Arial Rounded MT Bold";
+  text-align: center;
+  font-size: 20px;
+}
+.AC-text {
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: center;
+  font-size: 12px;
+  margin-top: 6px;
+  margin-bottom: 10px;
+}
+.AC-span {
+  color: #0080FF;
+}
+.personal-info {
+  font-size: 20px;
+  font-family: Arial, Helvetica, sans-serif;
+
+  border-radius: 10px;
+  font-size: 14px;
+}
+.personal-info:hover {
+  cursor: pointer;
+}
+.per-info-options {
+  font-size: 20px;
+  font-family: Arial, Helvetica, sans-serif;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  font-size: 14px;
+  opacity: calc();
+  /* padding: 0.25rem 0.5rem; */
+}
+.AC-input {
+  font-family: "Arial Rounded MT Bold";
+  letter-spacing: 0.64px;
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: 5px;
+  text-align: center;
+}
+.AC-input::placeholder {
+  font-size: 15px;
+  font-weight: 600;
+  color: #000;
+  text-align: center;
+}
+.AC-buttons-cancel {
+  font-family: "Arial Rounded MT Bold";
+  border: 2px solid white;
+  border-radius: 10px;
+  padding: 8px 0;
+  font-size: small;
+  font-weight: bolder;
+}
+.AC-buttons-save {
+  font-family: "Arial Rounded MT Bold";
+  border-radius: 10px;
+  padding: 8px 0;
+  font-size: small;
+  font-weight: bolder;
+  /* background-color: #0CFFA7; */
+}
+.AC-pp {
+  border-radius: 50%;
+}
+.AC-text-two {
+  font-family: "Arial Rounded MT Bold";
+  text-align: center;
+  font-size: 18px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+.Ac-cards {
+  /* align-items: center; */
+}
+/* NIGHT HUNTER R7 FRO BGMI PAGE OVERVIEWS ETC */
+.bg-NH {
+  background-image: url("https://res.cloudinary.com/dzyezryhf/image/upload/v1737726383/o6xpkgnslpcilej7qdsb.svg");
+  background-size: cover;
+  height: 100vh;
+  width: 100vw;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: #000000;
+}
+.NH-heading {
+  font-family: "BebasNeue";
+  /* font-size: 25px; */
+  font-weight: bold;
+}
+.NH-option-heading {
+  font-family: "BebasNeue";
+  /* font-size: 25px; */
+  font-weight: bold;
+}
+.NH-options {
+  font-family: "BebasNeue";
+  font-size: 22px;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+.frosted-glass-NH {
+  background-color: #000000; /* Transparent white */
+  backdrop-filter: blur(1px); /* Frosted glass effect */
+  -webkit-backdrop-filter: blur(10px); /* For Safari */
+  border: 1px solid rgba(255, 255, 255, 0.3); /* Border to enhance the effect */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional: for a subtle shadow */
+  opacity: calc(80%);
+}
+.p1{
+  height: 100%;
+  width: 18%;
+  background-image: url("../public/BGMI1.png");
+  background-size: 100% 100%;
+}
+.p2{
+  height: 100%;
+  width: 18%;
+  background-image: url("../public/CODM1.png");
+  background-size: 100% 100%;
+}
+.p3{
+  height: 100%;
+  width: 18%;
+  background-image: url("../public/VALORANT1.png");
+  background-size: 100% 100%;
+}
+.p4{
+  height: 100%;
+  width:18%;
+  background-image: url("../public/FREEFIRE1.png");
+  background-size: 100% 100%;
+}
+.trapezoid {
+  /* clip-path: polygon(5% 0%, 100% 95%, 100% 0%, 0% 100%); */
+  clip-path: polygon(5% 0%, 100% 0%, 95% 100%, 0% 100%);
+}
+select {
+  color: #9ca3af; /* Tailwind's text-gray-400 to match inputs with placeholder */
+}
+ 
+select:focus,
+select:valid {
+  color: #000000; /* Black text on selection/focus */
+}
+@keyframes slideIn {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.game-image-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.game-image {
+  height: 100px;
+  object-fit: contain;
+  border-radius: 10px;
+ 
+}
+.LeftSidebar{
+   clip-path: polygon(100% 0, 85% 100%, 0% 100%, 0 0);
+
+}
+options:hover{
+  color:#000000
+}

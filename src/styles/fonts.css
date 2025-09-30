@@ -1,0 +1,30 @@
+@font-face {
+  font-family: 'ArialRoundedMTBold';
+  src: url('/fonts/arialroundedmtbold.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'ArialRoundedMTBold';
+  src: url('/fonts/arialroundedmtbold.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'BebasNeue';
+  src: url('/fonts/BebasNeue-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'SourceSansPro';
+  src: url('/fonts/SourceSansPro-Regular.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'AgencyFB';
+  src: url('/fonts/AgencyFB.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
