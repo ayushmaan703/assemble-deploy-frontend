@@ -35,7 +35,7 @@ import ChangePassPhone from "./ChangePassPhone";
 import UsernameOTP from "./UsernameOTP";
 import UsernameSent from "./UsernameSent";
 import UsernameSentPhone from "./UsernameSentPhone";
-import Homepage from "./homepage/Home/Homepage";
+// import Homepage from "./homepage/Home/Homepage";
 import BgmiPage from "../pages/BgmiPage";
 import Hero from "./homepage/Hero";
 import NightHunter from "../pages/NightHunter";
@@ -67,7 +67,7 @@ const Body = () => {
         { path: "/ProfileSetPicture", element: <ProfileSetPicture /> },
         { path: "/PasswordSetup", element: <PasswordSetup /> },
         { path: "/CustomizeCard", element: <CustomizeCard /> },
-        { path: "/browse", element: <Homepage /> },
+        // { path: "/browse", element: <Homepage /> },
         { path: "/Peepee", element: <Peepee /> },
         { path: "/Terms", element: <TC /> },
         { path: "/ContactUs", element: <ContactUs /> },
