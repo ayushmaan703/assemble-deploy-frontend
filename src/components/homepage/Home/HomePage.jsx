@@ -219,32 +219,38 @@ const NotificationPanel = () => {
       </h3>
       <div className="space-y-4">
         {notificationsData.map((notif) => (
-          <div key={notif.id}>
-            <div className="flex justify-between items-start">
-              <p className="text-xs font-normal text-[#7FAFFF] leading-none tracking-[.04em]">
+           <div key={notif.id} className="mb-4 p-3 rounded-lg">
+            {/* Header: sender + time */}
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center">
+              <p className="text-xs font-normal text-[#7FAFFF] leading-none tracking-[.04em] break-words">
                 {notif.sender}
               </p>
-              <p className="text-xs text-gray-400 flex-shrink-0 ml-4">
+              <p className="text-xs text-gray-400 mt-1 sm:mt-0 sm:ml-4">
                 {notif.time}
               </p>
             </div>
-            <div className="flex justify-between items-center mt-2">
-              <p className="text-base font-normal text-white leading-tight tracking-[.02em] pr-4">
+
+            {/* Message + Actions */}
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mt-2 gap-2">
+              <p className="text-sm sm:text-base font-normal text-white leading-tight tracking-[.02em] break-words">
                 {notif.message}
               </p>
               {notif.type === "invite" && (
-                <div className="flex items-center gap-2.5 flex-shrink-0">
+                <div className="flex flex-wrap sm:flex-nowrap items-center gap-2 mt-2 sm:mt-0">
                   <button
                     onClick={() => (handleAcceptReject("accept", notif.id), setReqRes("accept"))}
-                    className="w-[81px] h-[27px] flex items-center justify-center rounded-[4px] px-3 py-1 bg-[#06BF00] text-white hover:bg-green-700 transition-colors text-xs font-bold leading-tight tracking-wider capitalize">
+                    className="flex-1 sm:flex-none w-full sm:w-[81px] h-[27px] flex items-center justify-center rounded-[4px] bg-[#06BF00] text-white hover:bg-green-700 transition-colors text-xs font-bold leading-tight tracking-wider capitalize max-sm:px-2">
                     Accept
                   </button>
                   <button
                     onClick={() => (handleAcceptReject("reject", notif.id), setReqRes("reject"))}
-                    className="w-[81px] h-[27px] flex items-center justify-center rounded-[4px] px-3 py-1 bg-red-500 text-white hover:bg-red-600 transition-colors text-xs font-bold leading-tight tracking-wider capitalize">
+                    className="flex-1 sm:flex-none w-full sm:w-[81px] h-[27px] flex items-center justify-center rounded-[4px] bg-red-500 text-white hover:bg-red-600 transition-colors text-xs font-bold leading-tight tracking-wider capitalize max-sm:px-2">
                     Reject
                   </button>
                 </div>
+              )}
+            </div>
+          </div>
               )}
             </div>
           </div>
