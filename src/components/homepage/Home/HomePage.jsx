@@ -60,7 +60,7 @@ function getUserDataForRegistration(gameMode, game) {
             return;
           }
           const res = await dispatch(getTeam(teamId.teamId))
-          if (gameMode === "squad" && res.payload?.teamMembers.length != 4) {
+          if (gameMode === "squad" && res.payload?.teamMembers.length != 3) {
             toast.error("Not enough members in team");
             return;
           }
