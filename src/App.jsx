@@ -74,7 +74,7 @@ import UsernameRecoveryViaEmail from "./components/ForgotCredential/UsernameReco
 import RecoveryViaEmailOTP from "./components/ForgotCredential/RecoveryViaEmailOTP";
 import ChangePasswordViaEmail from "./components/ForgotCredential/ChangePasswordViaEmail";
 import SucChangePasswordViaEmail from "./components/ForgotCredential/SucChangePasswordViaEmail";
-import HomePage from "./components/homepage/Home/HomePage";
+import HomePage from "./components/homepage/Home/Homepage";
 // Payment
 import TestPayment from "./components/TestPayment";
 import { ForgotPassword } from "./prvp/forgotPassword";
