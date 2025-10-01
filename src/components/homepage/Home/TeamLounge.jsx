@@ -727,7 +727,7 @@ function TeamLounge() {
             {/* Main content on the right */}
             <div className="flex-1 flex flex-col p-4 lg:p-6 gap-3 lg:gap-5 overflow-y-auto">
               {/* Horizontal toggle bar */}
-              <div className="absolute top-[75px] left-0 right-0 ml-[90px] mr-[40px] h-[56px] flex items-center justify-between border rounded-[12px] p-2 gap-4 shadow max-sm:mt-5 max-sm:h-[150px] max-sm:ml-16 max-sm:mr-5 z-30 " >
+              <div className="absolute top-[75px] left-0 right-0 ml-[90px] mr-[40px] h-[56px] flex items-center justify-between border rounded-[12px] p-2 gap-4 shadow max-sm:mt-5 max-sm:h-[150px] max-sm:ml-16 max-sm:mr-5 z-10 " >
                 <div className="flex rounded-[8px] w-full h-full gap-[8px] max-sm:flex-col">
                   {games.map((game, index) => {
                     const isActive = activeButton === index;
