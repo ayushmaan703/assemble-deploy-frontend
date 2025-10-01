@@ -24,7 +24,7 @@ export function Sidebar() {
 
         <div className="gap-3 flex flex-col">
           <a
-            href=""
+            href="https://www.youtube.com/@assemble_gui"
             target="_blank"
             rel="noopener noreferrer">
             <SidebarIcon icons={<YoutubeIcon />} />

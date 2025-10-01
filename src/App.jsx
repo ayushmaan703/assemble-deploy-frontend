@@ -91,7 +91,7 @@ const App = () => {
       const safeToken =
         rawToken && rawToken !== "undefined" && rawToken !== "null" ? rawToken : null;
       setToken(safeToken);
-    }, 5000);
+    }, 1000);
     return () => clearInterval(interval);
   }, []);
   return (
@@ -99,11 +99,11 @@ const App = () => {
       <Routes>
         <Route
           path="/"
-          element={login && token ? <Navigate to="/HomePage" /> : <AssembleLogin />}
+          element={token ? <Navigate to="/HomePage" /> : <AssembleLogin />}
         />
         <Route
           path="/HomePage"
-          element={login && token ? <HomePage /> : <Navigate to="/" />}
+          element={token ? <HomePage /> : <Navigate to="/" />}
         />
         <Route path="/LoginViaPhone" element={<LoginViaPhone />} />
         <Route path="/LoginViaPhoneOTP" element={<LoginViaPhoneOTP />} />
