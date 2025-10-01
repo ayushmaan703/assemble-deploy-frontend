@@ -1942,15 +1942,21 @@ const AccountCenter = () => {
       setFormData((prev) => ({ ...prev, gamingServer: user?.gamingServer || "asia" }));
     }
   }, [dispatch, id, activeSection, selectedItem]);
-
+  
+  const gameFunctions = {
+    Bgmi: getBgmiGameData,
+    Codm: getCodmGameData,
+    Freefire: getFreefireGameData,
+    Valorant: getValorantGameData,
+  };
   useEffect(() => {
     const fetch = async () => {
       await Promise.all(
         selectedGames.map((game) => {
           const gameKey = gamesToSend[game];
-          if (gameKey) {
-            const functionName = `get${gameKey}GameData`;
-            return dispatch(eval(`${functionName}`)({ userId: id }));
+           const func = gameFunctions[gameKey];
+          if (func) {
+            return dispatch(func({ userId: id }));
           }
           return Promise.resolve(null);
         }).filter(Boolean)
