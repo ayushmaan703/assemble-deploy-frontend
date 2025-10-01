@@ -756,7 +756,7 @@ const AccountCenter = () => {
     }
   };
 
-  const renderMobileContent = () => {
+  const renderMobileContent = (img) => {
     const sections = {
       "Account Settings": {
         items: [
@@ -1788,7 +1788,11 @@ const AccountCenter = () => {
                             className="w-full h-full object-cover"
                           />
                         ) : (
-                          <span className="text-gray-400">Preview</span>
+                          <img
+                            src={img}
+                            alt="Preview"
+                            className="w-full h-full object-cover"
+                          />
                         )}{" "}
                       </div>{" "}
                     </div>{" "}
@@ -3484,7 +3488,7 @@ const AccountCenter = () => {
               className="overflow-y-auto"
               style={{ height: "calc(100vh - 80px)" }}
             >
-              {renderMobileContent()}
+              {renderMobileContent(user?.avatarUrl)}
             </div>
           </div>
         </div>
