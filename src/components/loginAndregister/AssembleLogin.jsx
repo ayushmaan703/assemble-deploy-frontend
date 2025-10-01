@@ -335,7 +335,7 @@ export default function AssembleLogin() {
       {/* MOBILE: art first, then form */}
       <div className="w-full h-screen lg:hidden relative overflow-hidden flex flex-col">
         {!showFormMobile ? (
-          <div className="w-full h-full bg-gray-800 relative max-h-[calc(100vh-70px)]">
+          <div className="w-full h-[93vh] bg-gray-800 relative">
             <img
               src={images[currentIndex]}
               alt={`Character ${currentIndex + 1}`}
