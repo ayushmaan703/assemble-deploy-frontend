@@ -22,7 +22,7 @@ const UpperNav = (props) => {
   const closeAllMenus = () => setOpenMenu(null);
 
   return (
-    <div className="relative w-full">
+    <div className="relative w-full z-50">
       {/* ================= DESKTOP NAV ================= */}
       <div className="hidden md:flex w-full p-4 top-0 h-[10vh] fixed justify-between z-10">
         <div className="w-[12%]">
