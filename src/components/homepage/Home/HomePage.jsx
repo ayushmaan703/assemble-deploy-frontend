@@ -219,7 +219,7 @@ const NotificationPanel = () => {
       </h3>
       <div className="space-y-4">
         {notificationsData.map((notif) => (
-           <div key={notif.id} className="mb-4 p-3 rounded-lg">
+          <div key={notif.id} className="mb-4 p-3 rounded-lg">
             {/* Header: sender + time */}
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center">
               <p className="text-xs font-normal text-[#7FAFFF] leading-none tracking-[.04em] break-words">
@@ -248,9 +248,6 @@ const NotificationPanel = () => {
                     Reject
                   </button>
                 </div>
-              )}
-            </div>
-          </div>
               )}
             </div>
           </div>
