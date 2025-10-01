@@ -41,7 +41,7 @@ export const getValorantGameData = createAsyncThunk(
 // Update Valorant game data
 export const updateValorantGameData = createAsyncThunk(
   "valorant/updateGameData",
-  async ({ gameId, gameData }, { rejectWithValue }) => {
+  async ( gameData , { rejectWithValue }) => {
     try {
       const res = await axiosInstance.put(
         `/gamingInfo/valorant/update`,
