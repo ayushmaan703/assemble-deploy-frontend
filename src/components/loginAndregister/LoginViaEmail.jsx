@@ -34,16 +34,16 @@ export default function LoginViaEmail() {
   const dynamicSpacing = getDynamicSpacing(viewportHeight);
 
   const images = [
-    "./Login Image 01.png",
-    "./Login Image 02.png",
-    "./Login Image 03.png",
-    "./Login Image 04.png",
-    "./Login Image 05.png",
-    "./Login Image 06.png",
-    "./Login Image 07.png",
-    "./Login Image 08.png",
-    "./Login Image 09.png",
-    "./Login Image 10.png",
+    "https://res.cloudinary.com/mayushmaan/image/upload/v1759343206/Login_Image_01_zkzpw4.png",
+    "https://res.cloudinary.com/mayushmaan/image/upload/v1759343681/Login_Image_02_akp8xw.png",
+    "https://res.cloudinary.com/mayushmaan/image/upload/v1759343680/Login_Image_03_i6yjo6.png",
+    "https://res.cloudinary.com/mayushmaan/image/upload/v1759343659/Login_Image_04_bbbjsq.png",
+    "https://res.cloudinary.com/mayushmaan/image/upload/v1759343667/Login_Image_05_encbr5.png",
+    "https://res.cloudinary.com/mayushmaan/image/upload/v1759343663/Login_Image_06_kebrkx.png",
+    "https://res.cloudinary.com/mayushmaan/image/upload/v1759343666/Login_Image_07_ympvsw.png",
+    "https://res.cloudinary.com/mayushmaan/image/upload/v1759343681/Login_Image_08_uvnk5m.png",
+    "https://res.cloudinary.com/mayushmaan/image/upload/v1759343671/Login_Image_09_qyunla.png",
+    "https://res.cloudinary.com/mayushmaan/image/upload/v1759343680/Login_Image_10_gz6lbi.png",
   ];
 
   useEffect(() => {

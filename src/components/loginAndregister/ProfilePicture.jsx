@@ -30,7 +30,7 @@ export default function ProfilePicture() {
     gap: "10px",
     transform: "rotate(0deg)",
     opacity: 1,
-    borderRadius: "12px",
+    borderRadius: "100px",
     borderWidth: "1px",
     borderStyle: "solid",
     borderColor: "white",
@@ -39,7 +39,6 @@ export default function ProfilePicture() {
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
-    borderRadius: 100
   };
   const getDynamicSpacing = (height) => {
     if (height < 600) return 2; // `space-y-2`
@@ -62,7 +61,7 @@ export default function ProfilePicture() {
   const handleFileUpload = async () => {
     const res = await dispatch(uploadImage({ uploadedFiles, userId }))
     if (res.type === "uploadImage/fulfilled") {
-      navigate("/Personalinfo")
+      navigate("/CustomizeCard")
     } else {
       toast.error("error uploading image")
     }
@@ -155,7 +154,7 @@ export default function ProfilePicture() {
                 className="w-9 h-9 lg:w-12 lg:h-12 p-2 cursor-pointer"
                 src="./Vector.svg"
                 alt="Back"
-                // onClick={() => navigate('/RegisterUsername')}
+              // onClick={() => navigate('/RegisterUsername')}
               />
               <h2 className="lg:text-[32px] text-[20px] font-normal font-arialrounded text-center">
                 The Origin Scroll
@@ -224,7 +223,7 @@ export default function ProfilePicture() {
               <div className="flex flex-row gap-4 w-full">
                 <button
                   onClick={() =>
-                    navigate('/Personalinfo')
+                    navigate('/CustomizeCard')
                   }
                   className="bg-white border-2 border-black text-black hover:bg-gray-100 h-10 lg:h-auto lg:py-2 rounded-xl font-arialrounded text-[12px] lg:text-[20px] w-full"
                 >

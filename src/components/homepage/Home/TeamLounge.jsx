@@ -402,7 +402,7 @@ function useUsersData(game, activeButton) {
           playerRole: (res.teamInfo.find((td) => td.teamId == teamId) || {})?.teamRole || "",
           ign: res.gameData?.inGameName || "not set by player",
           Uid: res.gameData?.gameId || "not set by player",
-          image: res.avatarUrl
+          image: res.avatarUrl || "https://placehold.co/600x400/222222/ffffff?text=PI"
         }));
 
         setTeamMembers(formatted);
@@ -440,7 +440,7 @@ function getLeaderData(game) {
           playerRole: (res.teamInfo.find((td) => td.teamId == teamId) || {})?.teamRole || "",
           ign: res.gameData?.inGameName || "not set by player",
           Uid: res.gameData?.gameId || "not set by player",
-          image: res.avatarUrl
+          image: res.avatarUrl || "https://placehold.co/600x400/222222/ffffff?text=PI"
         });
       } catch (err) {
         // console.error("Failed to fetch team members:", err);

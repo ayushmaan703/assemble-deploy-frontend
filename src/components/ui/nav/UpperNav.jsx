@@ -135,10 +135,10 @@ const UpperNav = (props) => {
               className="absolute top-16 right-4 flex w-56 flex-col rounded-2xl border border-zinc-700 bg-zinc-800/90 p-2 text-white shadow-2xl backdrop-blur-md z-30"
             >
               <button
-                // onClick={() => handleMenuToggle("payment")}
+                onClick={() => handleMenuToggle("profile")}
                 className="flex w-full items-center gap-3 rounded-lg p-3 text-left text-sm font-medium transition-colors hover:bg-zinc-700"
               >
-                <NavPayment /> <span>Payments</span>
+                <ProfileIcon img={user.avatarUrl} /> <span>Profile</span>
               </button>
 
               <hr className="my-1 border-zinc-700" />
@@ -153,10 +153,10 @@ const UpperNav = (props) => {
               <hr className="my-1 border-zinc-700" />
 
               <button
-                onClick={() => handleMenuToggle("profile")}
+                // onClick={() => handleMenuToggle("payment")}  
                 className="flex w-full items-center gap-3 rounded-lg p-3 text-left text-sm font-medium transition-colors hover:bg-zinc-700"
               >
-                <ProfileIcon /> <span>Profile</span>
+                <NavPayment /> <span>Payments</span>
               </button>
             </motion.div>
           )}

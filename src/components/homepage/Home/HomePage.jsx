@@ -60,11 +60,11 @@ function getUserDataForRegistration(gameMode, game) {
             return;
           }
           const res = await dispatch(getTeam(teamId.teamId))
-          if (gameMode === "squad" && res.payload?.teamMembers.length < 2) {
+          if (gameMode === "squad" && res.payload?.teamMembers.length != 4) {
             toast.error("Not enough members in team");
             return;
           }
-          if (gameMode === "duo" && res.payload?.teamMembers.length === 0) {
+          if (gameMode === "duo" && res.payload?.teamMembers.length <= 1) {
             toast.error("Not enough members in team");
             return;
           }
@@ -357,7 +357,7 @@ const PlayerCard = ({ player, isLeader }) => {
     : "border border-zinc-700";
 
   return (
-    <div className={`w-[176px] h-[191px] rounded-lg ${leaderWrapperClass} max-sm:w-[150px]`}>
+    <div className={`w-[176px] h-[191px] rounded-lg ${leaderWrapperClass} min-w-[176px]`}>
       <div className="w-full h-full bg-black/75 rounded-[7px] flex flex-col items-center justify-between px-5 py-3">
         <p
           className={`text-[10px] font-bold leading-none tracking-[.04em] uppercase ${isLeader ? "text-[#0CFFA7]" : "text-[#FBFF00]"
@@ -406,7 +406,7 @@ const TeamLounge = () => {
 
   useEffect(() => {
     const fetchTeam = async () => {
-      const res = await dispatch(getTeamHome(teamId.filter(Boolean)[0]))      
+      const res = await dispatch(getTeamHome(teamId.filter(Boolean)[0]))
       if (isGameThere) {
         setTeamData(res.payload)
         setHasTeam(true)
@@ -501,14 +501,14 @@ const TeamLounge = () => {
         <div className="flex-1 flex flex-col justify-between text-white">
           <div className="flex flex-col gap-3">
             <img
-              src={teamData?.bannerUrl || "https://placehold.co/600x400/222222/ffffff?text=TEAM BANNER"}
+              src={teamData?.banner || "https://placehold.co/600x400/222222/ffffff?text=TEAM BANNER"}
               alt="Team Banner"
               className="w-full h-20 object-cover rounded-lg"
             />
             <div className="flex justify-between items-center px-1">
               <div className="flex items-center gap-3">
                 <img
-                  src={teamData?.logourl || "https://placehold.co/1080x1440/222222/ffffff?text=LOGO"}
+                  src={teamData?.logo || "https://placehold.co/1080x1440/222222/ffffff?text=LOGO"}
                   alt="Team Logo"
                   className="w-14 h-14 rounded-md object-cover"
                 />
@@ -534,44 +534,10 @@ const TeamLounge = () => {
               </div>
             </div>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 place-items-center mt-5">
+          <div className="flex overflow-auto md:grid-cols-4 gap-4 place-items-center mt-5">
             {teamData?.players.map((player, index) => (
               <PlayerCard key={index} player={player} isLeader={index === 0} />
             ))}
-            {/* <div className="w-full md:w-[176px] h-[191px] bg-black/75 rounded-lg border border-zinc-700 flex flex-col items-center justify-evenly px-5 py-3 text-center">
-              <p className="text-[10px] font-bold text-gray-300 uppercase tracking-widest">
-                PLAYER - 4
-              </p>
-              <div className="w-16 h-16 rounded-full bg-zinc-800 flex items-center justify-center">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="32"
-                  height="32"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="text-gray-500"
-                >
-                  <circle cx="12" cy="12" r="10"></circle>
-                  <circle cx="12" cy="10" r="3"></circle>
-                  <path d="M7 20.662V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.662"></path>
-                </svg>
-              </div>
-              <div className="flex flex-col gap-2 text-center">
-                <p className="text-[10px] text-gray-400 leading-tight">
-                  Find Player In Global User Of Assemble
-                </p>
-                <button
-                  onClick={() => setIsModalOpen(true)}
-                  className="w-full bg-white text-black text-xs font-bold py-2 rounded-md hover:bg-gray-300 transition-colors"
-                >
-                  Add Player
-                </button>
-              </div>
-            </div> */}
           </div>
         </div>
       )}

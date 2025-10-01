@@ -29,9 +29,12 @@ const FormPanel = ({
     onSuccess: async (response) => {
       try {
         const res = await dispatch(googleLogin(response.code))
-        if (res.type === "googleLogin/fulfilled") {
+        if (res.type === "googleLogin/fulfilled" && Object.keys(res.payload).length > 0) {
           toast.success("Logged in successfully!");
           navigate("/homepage")
+        } else {
+          toast.success("Please register first");
+          navigate("/RegisterViaEmail")
         }
       } catch (err) {
         console.error("Google login failed:", err);
@@ -43,7 +46,7 @@ const FormPanel = ({
   return (
     <div className="w-full h-full flex flex-col">
       {/* Mobile Banner - Fixed positioning */}
-      <div className="block lg:hidden w-full h-[15vh] min-h-[100px] overflow-hidden bg-gray-800">
+      < div className="block lg:hidden w-full h-[15vh] min-h-[100px] overflow-hidden bg-gray-800">
         <img
           src='./Login Image 01.png'
           alt="Banner"
@@ -250,7 +253,7 @@ const FormPanel = ({
           </div>
         </div>
       </div>
-    </div>
+    </div >
   );
 };
 
@@ -284,16 +287,16 @@ export default function AssembleLogin() {
   }[dynamicSpacing] || 'space-y-2';
 
   const images = [
-    './Login Image 01.png',
-    './Login Image 02.png',
-    './Login Image 03.png',
-    './Login Image 04.png',
-    './Login Image 05.png',
-    './Login Image 06.png',
-    './Login Image 07.png',
-    './Login Image 08.png',
-    './Login Image 09.png',
-    './Login Image 10.png',
+    "https://res.cloudinary.com/mayushmaan/image/upload/v1759343206/Login_Image_01_zkzpw4.png",
+    "https://res.cloudinary.com/mayushmaan/image/upload/v1759343681/Login_Image_02_akp8xw.png",
+    "https://res.cloudinary.com/mayushmaan/image/upload/v1759343680/Login_Image_03_i6yjo6.png",
+    "https://res.cloudinary.com/mayushmaan/image/upload/v1759343659/Login_Image_04_bbbjsq.png",
+    "https://res.cloudinary.com/mayushmaan/image/upload/v1759343667/Login_Image_05_encbr5.png",
+    "https://res.cloudinary.com/mayushmaan/image/upload/v1759343663/Login_Image_06_kebrkx.png",
+    "https://res.cloudinary.com/mayushmaan/image/upload/v1759343666/Login_Image_07_ympvsw.png",
+    "https://res.cloudinary.com/mayushmaan/image/upload/v1759343681/Login_Image_08_uvnk5m.png",
+    "https://res.cloudinary.com/mayushmaan/image/upload/v1759343671/Login_Image_09_qyunla.png",
+    "https://res.cloudinary.com/mayushmaan/image/upload/v1759343680/Login_Image_10_gz6lbi.png",
   ];
 
   useEffect(() => {
@@ -335,7 +338,7 @@ export default function AssembleLogin() {
       {/* MOBILE: art first, then form */}
       <div className="w-full h-screen lg:hidden relative overflow-hidden flex flex-col">
         {!showFormMobile ? (
-          <div className="w-full h-[93vh] bg-gray-800 relative">
+          <div className="w-full h-[93vh] bg-gray-800 relative ">
             <img
               src={images[currentIndex]}
               alt={`Character ${currentIndex + 1}`}

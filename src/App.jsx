@@ -82,28 +82,28 @@ import TeamLounge from "./components/homepage/Home/TeamLounge";
 import { useSelector } from "react-redux";
 
 const App = () => {
-  // const [token, setToken] = useState(localStorage.getItem("accessToken"));
-
-  // useEffect(() => {
-  //   const handleStorageChange = () => {
-  //     setToken(localStorage.getItem("accessToken"));
-  //   };
-  //   window.addEventListener("storage", handleStorageChange);
-  //   return () => {
-  //     window.removeEventListener("storage", handleStorageChange);
-  //   };
-  // }, []);
+  const [token, setToken] = useState(null);
   const login = useSelector((state) => state?.auth?.isLogin)
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const rawToken = localStorage.getItem("accessToken");
+      const safeToken =
+        rawToken && rawToken !== "undefined" && rawToken !== "null" ? rawToken : null;
+      setToken(safeToken);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
   return (
     <div className="overflow-hidden no-scrollbar">
       <Routes>
         <Route
           path="/"
-          element={login ? <Navigate to="/HomePage" /> : <AssembleLogin />}
+          element={login && token ? <Navigate to="/HomePage" /> : <AssembleLogin />}
         />
         <Route
           path="/HomePage"
-          element={login ? <HomePage /> : <Navigate to="/" />}
+          element={login && token ? <HomePage /> : <Navigate to="/" />}
         />
         <Route path="/LoginViaPhone" element={<LoginViaPhone />} />
         <Route path="/LoginViaPhoneOTP" element={<LoginViaPhoneOTP />} />

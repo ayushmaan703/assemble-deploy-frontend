@@ -71,6 +71,22 @@ export const verifyOtp = createAsyncThunk(
   }
 );
 
+export const googleRegister = createAsyncThunk(
+  "googleRegister",
+  async (code) => {
+    try {
+      const res = await axiosInstance.post("/user/googleAuthR", { code });
+      const { accessToken } = res.data.data;
+      localStorage.setItem("accessToken", accessToken);
+      return res.data.data;
+    } catch (err) {
+      const message = err.response?.data?.message || "Register failed";
+      toast.error(message);
+      throw err;
+    }
+  }
+);
+
 export const googleLogin = createAsyncThunk("googleLogin", async (code) => {
   try {
     const res = await axiosInstance.post("/user/googleAuth", { code });
@@ -275,7 +291,7 @@ const authSlice = createSlice({
     loading: false,
     error: null,
     userData: {},
-    isLogin: false,
+    isLogin: !!initialAccessToken,
   },
   reducers: {
     setAccessToken: (state, action) => {
@@ -331,6 +347,22 @@ const authSlice = createSlice({
         state.user = getUserFromToken(action.payload.accessToken);
       })
       .addCase(googleLogin.rejected, (state, action) => {
+        state.loading = false;
+        state.isLogin = false;
+        state.error = action.payload;
+      })
+      .addCase(googleRegister.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+        state.isLogin = false;
+      })
+      .addCase(googleRegister.fulfilled, (state, action) => {
+        state.loading = false;
+        state.isLogin = true;
+        state.accessToken = action.payload.accessToken;
+        state.user = getUserFromToken(action.payload.accessToken);
+      })
+      .addCase(googleRegister.rejected, (state, action) => {
         state.loading = false;
         state.isLogin = false;
         state.error = action.payload;

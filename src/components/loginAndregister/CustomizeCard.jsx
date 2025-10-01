@@ -98,7 +98,7 @@ export default function CustomizeCard() {
                                 className="w-9 h-9 lg:w-12 lg:h-12 p-2 cursor-pointer"
                                 src="./Vector.svg"
                                 alt="Back"
-                                onClick={() => navigate(-1)}
+                                onClick={() => navigate("/ProfilePicture")}
                             />
                             <h2 className="lg:text-[32px] text-[20px] font-arialrounded text-center">
                                 Customize Your Esports Card
