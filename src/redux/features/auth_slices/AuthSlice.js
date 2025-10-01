@@ -3,7 +3,7 @@ import axiosInstance from "../../../helper/axiosInstance";
 import toast from "react-hot-toast";
 import { jwtDecode } from "jwt-decode";
 
-const initialAccessToken = sessionStorage.getItem("accessToken");
+const initialAccessToken = localStorage.getItem("accessToken");
 
 const getUserFromToken = (token) => {
   try {
@@ -23,7 +23,7 @@ export const loginUser = createAsyncThunk(
         password,
       });
       const { accessToken } = res.data.data;
-      sessionStorage.setItem("accessToken", accessToken);
+      localStorage.setItem("accessToken", accessToken);
       toast.success("Logged in successfully!");
       return { accessToken };
     } catch (err) {
@@ -60,7 +60,7 @@ export const verifyOtp = createAsyncThunk(
         otp,
       });
       const { accessToken } = res.data.data;
-      sessionStorage.setItem("accessToken", accessToken);
+      localStorage.setItem("accessToken", accessToken);
       toast.success("Logged in successfully!");
       return { accessToken };
     } catch (err) {
@@ -75,7 +75,7 @@ export const googleLogin = createAsyncThunk("googleLogin", async (code) => {
   try {
     const res = await axiosInstance.post("/user/googleAuth", { code });
     const { accessToken } = res.data.data;
-    sessionStorage.setItem("accessToken", accessToken);
+    localStorage.setItem("accessToken", accessToken);
     return res.data.data;
   } catch (err) {
     const message = err.response?.data?.message || "Login failed";
@@ -89,7 +89,7 @@ export const logoutUser = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       await axiosInstance.post("/user/logout");
-      sessionStorage.removeItem("accessToken");
+      localStorage.removeItem("accessToken");
       toast.success("Logged out successfully!");
       return true;
     } catch (err) {
@@ -107,8 +107,8 @@ export const refreshToken = createAsyncThunk(
       const res = await axiosInstance.post("/user/refresh");
       const { accessToken } = res.data.data;
 
-      // Update sessionStorage
-      sessionStorage.setItem("accessToken", accessToken);
+      // Update localStorage
+      localStorage.setItem("accessToken", accessToken);
 
       return { accessToken };
     } catch (err) {
@@ -158,7 +158,6 @@ export const setGamingInfodb = createAsyncThunk(
         `/user/${userId}/gaming`,
         gamingData
       );
-
     } catch (error) {
       throw error;
     }
@@ -199,8 +198,6 @@ export const forgotPasswordViaEmail = createAsyncThunk(
   "forgotPasswordViaEmail",
   async ({ email, newPassword }) => {
     try {
-
-
       const res = await axiosInstance.post("/user/forgotPassword", {
         email,
         newPassword,
@@ -278,11 +275,12 @@ const authSlice = createSlice({
     loading: false,
     error: null,
     userData: {},
+    isLogin: false,
   },
   reducers: {
     setAccessToken: (state, action) => {
       state.accessToken = action.payload;
-      sessionStorage.setItem("accessToken", action.payload);
+      localStorage.setItem("accessToken", action.payload);
       state.user = getUserFromToken(action.payload);
     },
   },
@@ -292,40 +290,49 @@ const authSlice = createSlice({
       .addCase(loginUser.pending, (state) => {
         state.loading = true;
         state.error = null;
+        state.isLogin = false;
       })
       .addCase(loginUser.fulfilled, (state, action) => {
         state.loading = false;
         state.accessToken = action.payload.accessToken;
         state.user = getUserFromToken(action.payload.accessToken);
+        state.isLogin = true;
       })
       .addCase(loginUser.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
+        state.isLogin = false;
       })
       .addCase(verifyOtp.pending, (state) => {
         state.loading = true;
         state.error = null;
+        state.isLogin = false;
       })
       .addCase(verifyOtp.fulfilled, (state, action) => {
         state.loading = false;
+        state.isLogin = true;
         state.accessToken = action.payload.accessToken;
         state.user = getUserFromToken(action.payload.accessToken);
       })
       .addCase(verifyOtp.rejected, (state, action) => {
         state.loading = false;
+        state.isLogin = false;
         state.error = action.payload;
       })
       .addCase(googleLogin.pending, (state) => {
         state.loading = true;
         state.error = null;
+        state.isLogin = false;
       })
       .addCase(googleLogin.fulfilled, (state, action) => {
         state.loading = false;
+        state.isLogin = true;
         state.accessToken = action.payload.accessToken;
         state.user = getUserFromToken(action.payload.accessToken);
       })
       .addCase(googleLogin.rejected, (state, action) => {
         state.loading = false;
+        state.isLogin = false;
         state.error = action.payload;
       })
       .addCase(loginViaEmailId.pending, (state) => {
@@ -362,9 +369,11 @@ const authSlice = createSlice({
         state.loading = false;
         state.user = null;
         state.accessToken = null;
+        state.isLogin = false;
       })
       .addCase(logoutUser.rejected, (state, action) => {
         state.loading = false;
+        state.isLogin = true;
         state.error = action.payload;
       })
 

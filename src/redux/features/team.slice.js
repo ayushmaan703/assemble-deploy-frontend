@@ -174,7 +174,6 @@ export const getTeamHome = createAsyncThunk("getTeamHome", async (teamId) => {
 export const uploadTeamImage = createAsyncThunk(
   "uploadTeamImage",
   async ({ file }) => {
-
     try {
       const res = await axiosInstance.post(
         "/image/addTeamImage",

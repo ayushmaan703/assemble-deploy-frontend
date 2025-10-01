@@ -9,10 +9,11 @@ import NavBellMenu from "../../overlays/NavbellMenu";
 import NavPaymentMenu from "../../overlays/NavPaymentMenu";
 import ProfileMenu from "../../overlays/ProfileMenu";
 import { ChevronLeft, Menu } from "lucide-react";
+import { useSelector } from "react-redux";
 
 const UpperNav = (props) => {
   const [openMenu, setOpenMenu] = useState(null);
-
+  const user = useSelector((state) => state.auth.userData);
   const handleMenuToggle = (menuType) => {
     setOpenMenu((prev) => (prev === menuType ? null : menuType));
   };
@@ -85,7 +86,7 @@ const UpperNav = (props) => {
             onClick={() => handleMenuToggle("profile")}
             className="cursor-pointer relative"
           >
-            <ProfileIcon />
+            <ProfileIcon img={user.avatarUrl} />
           </div>
           <AnimatePresence>
             {openMenu === "profile" && (

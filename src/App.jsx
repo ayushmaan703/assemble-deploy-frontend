@@ -1,5 +1,5 @@
-import React from "react";
-import { Routes, Route } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Routes, Route, Navigate } from "react-router-dom";
 
 // Main Components
 import Header from "./components/Header";
@@ -74,17 +74,37 @@ import UsernameRecoveryViaEmail from "./components/ForgotCredential/UsernameReco
 import RecoveryViaEmailOTP from "./components/ForgotCredential/RecoveryViaEmailOTP";
 import ChangePasswordViaEmail from "./components/ForgotCredential/ChangePasswordViaEmail";
 import SucChangePasswordViaEmail from "./components/ForgotCredential/SucChangePasswordViaEmail";
-import HomePage from "./components/homepage/Home/HomePage";
+import HomePage from "./components/homepage/Home/Homepage";
 // Payment
 import TestPayment from "./components/TestPayment";
 import { ForgotPassword } from "./prvp/forgotPassword";
 import TeamLounge from "./components/homepage/Home/TeamLounge";
+import { useSelector } from "react-redux";
 
 const App = () => {
+  // const [token, setToken] = useState(localStorage.getItem("accessToken"));
+
+  // useEffect(() => {
+  //   const handleStorageChange = () => {
+  //     setToken(localStorage.getItem("accessToken"));
+  //   };
+  //   window.addEventListener("storage", handleStorageChange);
+  //   return () => {
+  //     window.removeEventListener("storage", handleStorageChange);
+  //   };
+  // }, []);
+  const login = useSelector((state) => state?.auth?.isLogin)
   return (
     <div className="overflow-hidden no-scrollbar">
       <Routes>
-        <Route path="/" element={<AssembleLogin />} />
+        <Route
+          path="/"
+          element={login ? <Navigate to="/HomePage" /> : <AssembleLogin />}
+        />
+        <Route
+          path="/HomePage"
+          element={login ? <HomePage /> : <Navigate to="/" />}
+        />
         <Route path="/LoginViaPhone" element={<LoginViaPhone />} />
         <Route path="/LoginViaPhoneOTP" element={<LoginViaPhoneOTP />} />
         <Route path="/LoginViaEmail" element={<LoginViaEmail />} />
@@ -104,9 +124,8 @@ const App = () => {
         <Route path="/RegisterViaPhone" element={<RegisterViaPhone />} />
         <Route path="/RegisterViaPhoneOTP" element={<RegisterViaPhoneOTP />} />
 
-        <Route path="/HomePage" element={<HomePage />} />
 
-        <Route path="/TeamLounge" element={<TeamLounge/>}/>
+        <Route path="/TeamLounge" element={<TeamLounge />} />
 
         {/* Organizer Routes */}
         <Route

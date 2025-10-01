@@ -594,9 +594,9 @@ function TeamLounge() {
 
   //db connection 
 
-  const handleFileUpload = async (type) => {
+  const handleFileUpload = async (type, filei) => {
     if (type == "banner") {
-      const file = uploadedFiles.banner
+      const file = filei
       const res1 = await dispatch(uploadTeamImage({ file }))
       if (res1.type === "uploadTeamImage/fulfilled") {
         setBanner(res1.payload.url)
@@ -605,7 +605,7 @@ function TeamLounge() {
       }
     }
     if (type == "logo") {
-      const file = uploadedFiles.logo
+      const file = filei
       const res = await dispatch(uploadTeamImage({ file }))
       if (res.type === "uploadTeamImage/fulfilled") {
         setLogo(res.payload.url)
@@ -727,8 +727,8 @@ function TeamLounge() {
             {/* Main content on the right */}
             <div className="flex-1 flex flex-col p-4 lg:p-6 gap-3 lg:gap-5 overflow-y-auto">
               {/* Horizontal toggle bar */}
-              <div className="absolute top-[75px] left-0 right-0 ml-[90px] mr-[40px] h-[56px] flex items-center justify-between border rounded-[12px] p-2 gap-4 shadow max-sm:mt-10 max-sm:h-[150px] max-sm:ml-16 max-sm:mr-5" >
-                <div className="flex rounded-[8px] w-full h-full gap-[8px] max-sm:flex-col  ">
+              <div className="absolute top-[75px] left-0 right-0 ml-[90px] mr-[40px] h-[56px] flex items-center justify-between border rounded-[12px] p-2 gap-4 shadow max-sm:mt-5 max-sm:h-[150px] max-sm:ml-16 max-sm:mr-5 z-30 " >
+                <div className="flex rounded-[8px] w-full h-full gap-[8px] max-sm:flex-col">
                   {games.map((game, index) => {
                     const isActive = activeButton === index;
                     return (
@@ -755,11 +755,11 @@ function TeamLounge() {
           {/* STEP 0: Empty */}
           {squadStep === 0 && (
             <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 
-                text-white p-6 md:p-8 rounded-lg z-20 flex flex-col md:flex-row gap-6 md:gap-4 
+                text-white rounded-lg z-20 flex flex-col md:flex-row gap-6 md:gap-4 
                 items-center md:items-start max-w-[95%] md:max-w-none mt-24">
 
               {/* Left image */}
-              <div className="rounded-lg w-full max-w-[280px] md:max-w-[320px] h-auto md:h-[308px]">
+              <div className="rounded-lg w-full max-w-[280px] md:max-w-[320px] h-auto md:h-[308px] max-sm:hidden">
                 <img
                   src={vector1}
                   alt="Vector 1"
@@ -769,7 +769,7 @@ function TeamLounge() {
 
               {/* Right content */}
               <div className="flex flex-col gap-4 flex-1 justify-center items-center md:items-start ">
-                <div className="w-full max-w-[550px] p-4 rounded-lg flex flex-col gap-4 items-center md:items-start">
+                <div className="w-full  rounded-lg flex flex-col gap-4 items-center md:items-start">
                   <div className="capitalize text-center md:text-left font-sans text-xl sm:text-2xl leading-tight">
                     Put together a team!
                   </div>
@@ -780,7 +780,7 @@ function TeamLounge() {
                   </div>
                 </div>
 
-                <div className="w-full max-w-[550px] flex flex-col gap-3 px-2 md:px-0">
+                <div className="w-full max-w-[550px] flex flex-col gap-3  md:px-0">
                   <button
                     className={`px-4 py-2 rounded text-base sm:text-lg transition ${activeButton !== null
                       ? "bg-white text-black hover:bg-gray-200"
@@ -799,7 +799,12 @@ function TeamLounge() {
 
           {/* STEP 1: Add Details */}
           {squadStep === 1 && (
-            <div className="absolute top-[150px] left-[90px] right-[40px] transform text-white p-6 rounded-lg z-20 max-sm:mt-28 max-sm:left-[58px] max-sm:right-[15px]">
+            <div
+              className="absolute top-[150px] left-[90px] right-[40px] 
+               text-white p-6 rounded-lg z-20 
+               max-sm:mt-28 max-sm:left-[58px] max-sm:right-[15px] 
+               max-sm:max-h-[calc(100vh-250px)] overflow-y-auto no-scrollbar"
+            >
               <div className="flex gap-4 mb-4">
                 {/* Logo Box */}
                 {banner && <div
@@ -836,7 +841,7 @@ function TeamLounge() {
                   onChange={(e) => {
                     if (e.target.files && e.target.files[0]) {
                       handleFileChange("logo", e.target.files[0]);
-                      handleFileUpload("logo")
+                      handleFileUpload("logo", e.target.files[0])
                     }
                   }}
                 />
@@ -874,7 +879,7 @@ function TeamLounge() {
                   onChange={(e) => {
                     if (e.target.files && e.target.files[0]) {
                       handleFileChange("banner", e.target.files[0]);
-                      handleFileUpload("banner")
+                      handleFileUpload("banner", e.target.files[0])
                     }
                   }}
                 />
@@ -882,8 +887,8 @@ function TeamLounge() {
 
               {/* Team Name & Tagline */}
               <div className="flex flex-col lg:flex-row gap-4 w-full">
-                {/* Team Name: fixed width */}
-                <div className="w-[360px] max-sm:w-[310px] font-arialrounded">
+                {/* Team Name: fixed width on large, full width on small */}
+                <div className="w-full lg:w-[360px] font-arialrounded">
                   <FloatingLabelInput
                     name="teamName"
                     label="Team Name"
@@ -911,7 +916,7 @@ function TeamLounge() {
                 </div>
 
                 {/* Tagline: fills remaining space */}
-                <div className="flex-1 font-arialrounded">
+                <div className="w-full flex-1 font-arialrounded">
                   <FloatingLabelInput
                     name="tagline"
                     label="Tagline"
@@ -950,7 +955,7 @@ function TeamLounge() {
                   style={{
                     height: "108px",
                     borderRadius: "12px",
-                    paddingTop: "28px", // increased to avoid label overlap
+                    paddingTop: "28px", // avoid label overlap
                     paddingRight: "23px",
                     paddingBottom: "7px",
                     paddingLeft: "23px",
@@ -960,6 +965,7 @@ function TeamLounge() {
                   inputClassName="!shadow-none !bg-white !hover:bg-white !hover:text-black focus:outline-none w-full font-arialrounded"
                 />
               </div>
+
 
               {/* Buttons */}
               <div className="flex justify-end gap-4 mt-4  max-sm:items-stretch">
@@ -1196,7 +1202,7 @@ function TeamLounge() {
 
         </div>
       </div>
-    </div>
+    </div >
   );
 }
 

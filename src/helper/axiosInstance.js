@@ -1,4 +1,5 @@
 import axios from "axios";
+import toast from "react-hot-toast";
 
 const url = import.meta.env.VITE_URL;
 
@@ -11,7 +12,7 @@ const axiosInstance = axios.create({
 });
 
 axiosInstance.interceptors.request.use((config) => {
-  const token = sessionStorage.getItem("accessToken");
+  const token = localStorage.getItem("accessToken");
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
   }
@@ -33,12 +34,11 @@ axiosInstance.interceptors.response.use(
           { withCredentials: true }
         );
 
-        sessionStorage.setItem("accessToken", data.accessToken);
+        localStorage.setItem("accessToken", data.accessToken);
         originalRequest.headers.Authorization = `Bearer ${data.accessToken}`;
-
         return axiosInstance(originalRequest);
       } catch (error) {
-        sessionStorage.clear();
+        localStorage.clear();
         window.location.href = "/";
       }
     }

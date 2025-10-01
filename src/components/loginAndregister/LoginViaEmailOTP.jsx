@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import logo from "../../assets/ASSEMBLE LOGO SECONDARY 1.svg";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useViewportHeight from "../../hooks/useViewportHeight";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { verifyOtp } from "../../redux/features/auth_slices/AuthSlice";
+import { sendEmail } from "../../redux/features/auth_slices/RegisterSlice";
 
 export default function LoginViaEmailOTP() {
   const [isLogin, setIsLogin] = useState(true);
@@ -16,7 +17,7 @@ export default function LoginViaEmailOTP() {
   const [fade, setFade] = useState(true);
   const emailId = useSelector((state) => state.email.emailId);
   const dispatch = useDispatch();
-
+  const [timer, setTimer] = useState(15);
   const getDynamicSpacing = (height) => {
     if (height < 600) return 2; // `space-y-2` (small screens)
     if (height < 800) return 4; // `space-y-4` (medium screens)
@@ -40,6 +41,14 @@ export default function LoginViaEmailOTP() {
   ];
 
   useEffect(() => {
+    if (timer > 0) {
+      const countdown = setInterval(() => {
+        setTimer((prev) => prev - 1);
+      }, 1000);
+      return () => clearInterval(countdown);
+    }
+  }, [timer]);
+  useEffect(() => {
     const interval = setInterval(() => {
       setFade(false);
       setTimeout(() => {
@@ -52,7 +61,9 @@ export default function LoginViaEmailOTP() {
 
     return () => clearInterval(interval);
   }, []);
-
+  const handleSubmitemail = async () => {
+    await dispatch(sendEmail(emailId));
+  };
   const url = import.meta.env.VITE_URL;
   const handleApiCall = async (e) => {
 
@@ -69,7 +80,7 @@ export default function LoginViaEmailOTP() {
   return (
     <div className="w-full min-h-screen lg:h-screen flex flex-col lg:flex-row overflow-x-hidden lg:overflow-hidden">
       {/* Mobile Banner */}
-      <div className="block lg:hidden w-full min-h-[60px] max-h-[17vh]  top-0 left-0 z-10 overflow-hidden flex items-center justify-center">
+      <div className=" lg:hidden w-full min-h-[60px] max-h-[17vh]  top-0 left-0 z-10 overflow-hidden flex items-center justify-center">
         <img
           src='./Login Image 06.png'
           alt="Banner"
@@ -133,7 +144,7 @@ export default function LoginViaEmailOTP() {
             </h2>
             <p className="text-center text-gray-500 mt-4 font-arialrounded text-[10px] lg:text-base">
               We will send you a sign-in code through your registered email
-              address (Gamez********dia@gmail.com). Begin your journey promptly
+              address {emailId}. Begin your journey promptly
               with a swift login.
             </p>
           </div>
@@ -148,7 +159,7 @@ export default function LoginViaEmailOTP() {
                   Enter sign in code for
                 </span>
                 <span className="font-arialrounded font-normal text-sm leading-none tracking-wider text-[#737373] lg:text-[14px] text-[12px]">
-                  gamez********dia@gmail.com
+                  {emailId}
                 </span>
                 <button
                   className="transition-all duration-300 ease-out font-sans font-semibold  leading-none tracking-wider text-[#737373] uppercase hover:text-gray-700 lg:text-[12px] text-[10px]"
@@ -207,10 +218,19 @@ export default function LoginViaEmailOTP() {
               </div>
 
               {/* Resend Timer */}
-              <div className="text-center mt-3 lg:mt-0">
-                <span className="font-sans  text-[14px] lg:text-base leading-normal tracking-wide text-[#0D0D0D]">
-                  Resend OTP In 00:15
-                </span>
+              <div className="text-center">
+                {timer > 0 ? (
+                  <span className="text-sm lg:text-base text-[#0D0D0D]">
+                    Resend OTP in 00:{timer < 10 ? `0${timer}` : timer}
+                  </span>
+                ) : (
+                  <button
+                    onClick={() => (setTimer(15), handleSubmitemail())}
+                    className="text-sm lg:text-base text-[#FD520F] font-semibold"
+                  >
+                    Resend OTP
+                  </button>
+                )}
               </div>
             </div>
 
@@ -232,7 +252,7 @@ export default function LoginViaEmailOTP() {
             <div className="flex flex-row justify-between text-xs lg:text-sm">
               <span
                 className="h-6 lg:h-8 transition-all duration-300 ease-in font-arialrounded font-normal text-[12px] lg:text-[20px] leading-none tracking-wider text-[#BFBFBF] cursor-pointer"
-                onClick={() => navigate("/LoginViaEmail")}
+              // onClick={() => navigate("/LoginViaEmail")}
               >
                 Login Via Sign In Code
               </span>

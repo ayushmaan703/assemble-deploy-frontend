@@ -43,13 +43,10 @@ export const updateValorantGameData = createAsyncThunk(
   "valorant/updateGameData",
   async ({ gameId, gameData }, { rejectWithValue }) => {
     try {
-      const token = sessionStorage.getItem("accessToken");
-
-      const res = await axiosInstance.put(`/game/update/${gameId}`, gameData, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const res = await axiosInstance.put(
+        `/gamingInfo/valorant/update`,
+        gameData
+      );
 
       return res.data;
     } catch (err) {

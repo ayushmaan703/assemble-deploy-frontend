@@ -47,7 +47,7 @@ export const registerUser = createAsyncThunk(
         username: username,
         password: password,
       });
-      sessionStorage.setItem("accessToken", res.data.data.accessToken);
+      localStorage.setItem("accessToken", res.data.data.accessToken);
       toast.success("Registered successfully!");
       return res.data;
     } catch (err) {
