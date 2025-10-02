@@ -649,7 +649,8 @@ const HomePage = ({ onNavigateToTournament }) => {
       }
     }).filter(Boolean)[0]
 
-    const prizePool = d.prizePool.reduce((acc, p) => acc + Number(p.amount), 0);
+    // const prizePool = d.prizePool.reduce((acc, p) => acc + Number(p.amount), 0);
+    const prizePool = d.totalPrizepool
 
     let data = {
       id: d._id,
@@ -1266,7 +1267,7 @@ const TournamentDetailsPage = ({ tournament, onNavigateBack }) => {
                       Total Prizepool
                     </p>
                     <p className="text-lg sm:text-xl font-bold text-white mt-1 tracking-wide capitalize">
-                      {tournament.prizePool}
+                      {prizeData.total}
                     </p>
                   </div>
 
