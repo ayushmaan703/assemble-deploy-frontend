@@ -740,7 +740,7 @@ const TournamentDetailsPage = ({ tournament, onNavigateBack }) => {
     }
   }).filter(Boolean)[0]
 
-  const total = tournamentDataDB.prizePool.reduce((acc, p) => acc + Number(p.amount), 0);
+  // const total = tournamentDataDB.prizePool.reduce((acc, p) => acc + Number(p.amount), 0);
   const winner = tournamentDataDB.prizePool.find((p) => p.rank == '1')
   const runnerUp1 = tournamentDataDB.prizePool.find((p) => p.rank == '2')
   const runnerUp2 = tournamentDataDB.prizePool.find((p) => p.rank == '3')
@@ -886,7 +886,7 @@ const TournamentDetailsPage = ({ tournament, onNavigateBack }) => {
   };
 
   const prizeData = {
-    total,
+    total: tournamentDataDB.totalPrizepool,
     winner: winner?.amount || "",
     runnerUp1: runnerUp1?.amount || "",
     runnerUp2: runnerUp2?.amount || "",
