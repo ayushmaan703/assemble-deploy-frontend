@@ -9,6 +9,7 @@ export const emailIdSlice = createSlice({
   initialState,
   reducers: {
     setEmailId: (state, action) => {
+      localStorage.setItem("email", action.payload);
       state.emailId = action.payload;
     },
   },

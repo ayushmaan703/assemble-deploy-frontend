@@ -85,12 +85,15 @@ const registerSlice = createSlice({
   initialState,
   reducers: {
     setEmail: (state, action) => {
+      localStorage.setItem("email", action.payload);
       state.email = action.payload;
     },
     setOtp: (state, action) => {
+      localStorage.setItem("otp", action.payload);
       state.otp = action.payload;
     },
     setUsername: (state, action) => {
+      localStorage.setItem("usernameId", action.payload);
       state.username = action.payload;
     },
     setPassword: (state, action) => {

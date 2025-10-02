@@ -18,9 +18,9 @@ export default function PasswordSetup() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [fade, setFade] = useState(true);
 
-  const emailId = useSelector((state) => state.email.emailId);
-  const usernameId = useSelector((state) => state.register.username);
-  const email = useSelector((state) => state.register.email);
+  const emailId = localStorage.getItem("email") || useSelector((state) => state.email.emailId);
+  const usernameId = localStorage.getItem("usernameId") || useSelector((state) => state.register.username);
+  const email = localStorage.getItem("email") || useSelector((state) => state.register.email)
   const isLoading = useSelector((state) => state.register.loading);
 
   const getDynamicSpacing = (height) => {
@@ -52,6 +52,9 @@ export default function PasswordSetup() {
       if (result.type === "auth/registerUser/fulfilled") {
         await dispatch(getUserData(result._id))
         navigate("/ProfilePicture");
+        localStorage.removeItem("email");
+        localStorage.removeItem("usernameId");
+        localStorage.removeItem("otp");
       }
     } catch (err) {
       // console.error("Unexpected error during registration:", err);

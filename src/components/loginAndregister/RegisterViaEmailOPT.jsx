@@ -8,7 +8,7 @@ import toast from "react-hot-toast";
 import Loader from "../Loader";
 
 export default function RegisterViaEmailOTP() {
-  const emailId = useSelector((state) => state.register.email);
+  const emailId = localStorage.getItem("email") || useSelector((state) => state.register.email);
   const dispatch = useDispatch();
   const [isLogin, setIsLogin] = useState(true);
   const [otpValues, setOtpValues] = useState(["", "", "", "", "", ""]);
@@ -64,7 +64,7 @@ export default function RegisterViaEmailOTP() {
       return () => clearInterval(countdown);
     }
   }, [timer]);
-  const email = useSelector((state) => state.register.email)
+  const email = localStorage.getItem("email") || useSelector((state) => state.register.email)
   const handleSubmitemail = async () => {
     await dispatch(sendEmail(email));
   };
