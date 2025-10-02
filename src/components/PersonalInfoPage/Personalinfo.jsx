@@ -421,10 +421,13 @@ function Main() {
 
   // --- UI Logic for Mobile --- 
   const getBackgroundImage = () => {
-    if (currentView === 'PERSONAL_FORM' || currentView === 'EDUCATION_FORM') return "bg-[url('/FinalPI.png')]";
-    if (currentView === 'GAMING_FORM' && !detailsClicked) return "bg-[url('/GamingInfo.png')]";
-    if (detailsClicked || currentView === 'SUMMARY_VIEW' || currentView === 'SELECTED_GAMES_VIEW') return "bg-[url('/DeatilsPage.png')]";
-    return "bg-[url('/FinalPI.png')]";
+    if (currentView === 'PERSONAL_FORM' || currentView === 'EDUCATION_FORM')
+      return "bg-[url('https://res.cloudinary.com/mayushmaan/image/upload/v1759389558/FinalPI_hclgxj.png')]";
+    if (currentView === 'GAMING_FORM' && !detailsClicked)
+      return "bg-[url('https://res.cloudinary.com/mayushmaan/image/upload/v1759389391/GamingInfo_k5iigh.png')]";
+    if (detailsClicked || currentView === 'SUMMARY_VIEW' || currentView === 'SELECTED_GAMES_VIEW')
+      return "bg-[url('https://res.cloudinary.com/mayushmaan/image/upload/v1759389386/DeatilsPage_z8otpq.png')]";
+    return "bg-[url('https://res.cloudinary.com/mayushmaan/image/upload/v1759389558/FinalPI_hclgxj.png')]";
   };
   const isCardView = currentView === 'SHOW_PERSONAL_CARD' || currentView === 'SHOW_EDUCATION_CARD' || currentView === 'SELECTED_GAMES_VIEW' || currentView === 'SUMMARY_VIEW';
   const mainContainerClasses = isCardView
@@ -498,13 +501,13 @@ function Main() {
     return (
       <div
         className={`${detailsClicked
-          ? "bg-[url('/DeatilsPage.png')]"
+          ? "bg-[url('https://res.cloudinary.com/mayushmaan/image/upload/v1759389386/DeatilsPage_z8otpq.png')]"
           : personalInfo
-            ? "bg-[url('/FinalPI.png')]"
+            ? "bg-[url('https://res.cloudinary.com/mayushmaan/image/upload/v1759389558/FinalPI_hclgxj.png')]"
             : educationalInfo
-              ? "bg-[url('/cyberman.png')]"
+              ? "bg-[url('https://res.cloudinary.com/mayushmaan/image/upload/v1759389387/cyberman_qppcyy.png')]"
               : gamingInfo
-                ? "bg-[url('/GamingInfo.png')]"
+                ? "bg-[url('https://res.cloudinary.com/mayushmaan/image/upload/v1759389391/GamingInfo_k5iigh.png')]"
                 : ""
           } bg-cover font-sa h-screen w-screen overflow-hidden`} // Added overflow-hidden 
       >
@@ -522,8 +525,8 @@ function Main() {
           </div>
           <div className="flex items-center gap-3">
             <div className="text-right font-arialrounded">
-              <div className="text-sm font-light uppercase ">Naxna.gamer</div>
-              <div className="text-base font-medium">N21072005/MP/VS</div>
+              {/* <div className="text-sm font-light uppercase "> </div>
+              <div className="text-base font-medium">N21072005/MP/VS</div> */}
             </div>
             <div className="w-10 h-10 bg-white rounded-full"></div>
           </div>
@@ -1219,7 +1222,7 @@ function Main() {
 
                             <div className="flex flex-col p-4 pt-0 text-sm space-y-3 justify-between">
                               <div className="text-base font-semibold tracking-wide text-center">
-                                NAXNA.GAMER
+
                               </div>
 
                               <div>
@@ -1392,7 +1395,7 @@ function Main() {
                   {/* Personal Info */}
                   <div className="flex-shrink-0">
                     <PersonalInfoCard
-                      username="NAXNA.GAMER"
+                      username=" "
                       fullname={fullName || "None"}
                       gender={gender || "None"}
                       age={age || "None"}
@@ -1409,7 +1412,7 @@ function Main() {
                   {/* Educational Info */}
                   <div className="flex-shrink-0">
                     <EducationInfoCard
-                      username="NAXNA.GAMER"
+                      username=" "
                       highestEducation={highestEducation || "None"}
                       institutionName={institutionName || "None"}
                       state={eduState || "None"}
@@ -1424,7 +1427,7 @@ function Main() {
                   {/* Gaming Info */}
                   <div className="flex-shrink-0">
                     <GamingInfoCard
-                      username="NAXNA.GAMER"
+                      username=" "
                       skillLevel={skillLevel || "None"}
                       gamingPlatform={gamingPlatform || "None"}
                       gamingServer={gamingServer || "None"}
@@ -1530,8 +1533,8 @@ function Main() {
         </div>
         <div className="flex items-center gap-3 mt-2 sm:mt-0">
           <div className="text-right">
-            <div className="font-arialrounded text-xs font-normal capitalize leading-none tracking-wide">Naxna.gamer</div>
-            <div className="font-arialrounded text-[10px] font-normal uppercase leading-none tracking-wide">N21072005/MP/VS</div>
+            {/* <div className="font-arialrounded text-xs font-normal capitalize leading-none tracking-wide"> </div>
+            <div className="font-arialrounded text-[10px] font-normal uppercase leading-none tracking-wide">N21072005/MP/VS</div> */}
           </div>
           <div className="w-6 h-6 bg-white rounded-full"></div>
         </div>
@@ -1666,7 +1669,7 @@ function Main() {
             {/* --- STEP 2: PERSONAL CARD --- */}
             {currentView === 'SHOW_PERSONAL_CARD' && (
               <div className="flex flex-col items-center justify-center gap-4 py-8">
-                <PersonalInfoCard username="NAXNA.GAMER" fullname={fullName || 'None'} gender={gender || 'None'} age={age || 'None'} phoneNumber={phoneNumber || 'None'} tagline={tagline || 'None'} state={state || 'None'} country={country || 'None'} pincode={pinCode || 'None'} onEdit={handleCardEditMobile("PERSONAL_FORM")} address={address || 'None'} />
+                <PersonalInfoCard username=" " fullname={fullName || 'None'} gender={gender || 'None'} age={age || 'None'} phoneNumber={phoneNumber || 'None'} tagline={tagline || 'None'} state={state || 'None'} country={country || 'None'} pincode={pinCode || 'None'} onEdit={handleCardEditMobile("PERSONAL_FORM")} address={address || 'None'} />
                 <button className="bg-black text-white flex items-center justify-center mt-4 font-['Arial_Rounded_MT_Bold'] font-normal text-xs leading-none tracking-normal capitalize" style={{ width: '268px', height: '40px', borderRadius: '4px', padding: '8px 16px' }} onClick={() => setCurrentView('EDUCATION_FORM')}>Add Educational Information</button>
               </div>
             )}
@@ -1794,7 +1797,7 @@ function Main() {
             {currentView === "SHOW_EDUCATION_CARD" && (
               <div className="flex flex-col items-center justify-center gap-4 py-8">
                 <EducationInfoCard
-                  username="NAXNA.GAMER"
+                  username=" "
                   highestEducation={highestEducation || "None"}
                   institutionName={institutionName || "None"}
                   state={eduState || "None"}
@@ -2020,7 +2023,7 @@ function Main() {
                           alt={activeGameId}
                           className="w-full h-36 object-cover rounded-lg my-4" />
                         <div className="flex flex-col p-4 pt-0 text-sm space-y-3 justify-between">
-                          <div className="text-base font-semibold tracking-wide text-center">NAXNA.GAMER</div>
+                          <div className="text-base font-semibold tracking-wide text-center"> </div>
                           <div>
                             <div className="text-xs text-gray-300">{activeGameId.toUpperCase()} UID</div>
                             <div className="font-medium">{currentGame?.id || 'None'}</div>
@@ -2130,7 +2133,7 @@ function Main() {
             {currentView === 'SUMMARY_VIEW' && (
               <div className="flex flex-col gap-8 w-full px-2 md:px-5 py-5 h-auto overflow-y-auto">
                 <PersonalInfoCard
-                  username="NAXNA.GAMER"
+                  username=" "
                   fullname={fullName || 'None'}
                   gender={gender || 'None'}
                   age={age || 'None'}
@@ -2142,7 +2145,7 @@ function Main() {
                   onEdit={handleCardEditMobile("PERSONAL_FORM")}
                   address={address || 'None'} />
                 <EducationInfoCard
-                  username="NAXNA.GAMER"
+                  username=" "
                   highestEducation={highestEducation || 'None'}
                   institutionName={institutionName || 'None'}
                   state={eduState || 'None'}
@@ -2152,7 +2155,7 @@ function Main() {
                   endingYear={endingYear || 'None'}
                   onEdit={handleCardEditMobile("EDUCATION_FORM")} />
                 <GamingInfoCard
-                  username="NAXNA.GAMER"
+                  username=" "
                   skillLevel={skillLevel || 'None'}
                   gamingPlatform={gamingPlatform || 'None'}
                   gamingServer={gamingServer || 'None'}

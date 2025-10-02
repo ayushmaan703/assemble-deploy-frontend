@@ -606,7 +606,7 @@ const TournamentCard = ({ tournament, onNavigate }) => (
             {tournament.entryFee}
           </p>
           <div className="ml-2 text-left">
-            <p className="text-[10px] sm:text-xs font-bold text-green-500">68% Off</p>
+            <p className="text-[10px] sm:text-xs font-bold text-green-500">76% Off</p>
             <p className="text-[10px] sm:text-xs font-normal text-red-500 line-through">999/-</p>
           </div>
         </div>
@@ -979,7 +979,9 @@ const TournamentDetailsPage = ({ tournament, onNavigateBack }) => {
         <h3 className="text-4xl font-bold max-sm:text-2xl text-center">Roadmap</h3>
         <div className="mt-10 flex justify-center max-sm:mt-5">
           <img
-            src={tournamentDataDB.game == "FREEFIRE" ? roadmapImgFF : roadmapImgBGMICODM}
+            src={tournamentDataDB.game == "FREEFIRE" ?
+              "https://res.cloudinary.com/mayushmaan/image/upload/v1759388365/Frame_306_srpmnc.png" :
+              "https://res.cloudinary.com/mayushmaan/image/upload/v1759388365/Frame_305_djikdv.png"}
             alt="Tournament Roadmap"
             className="w-[50%]  max-sm:w-[90%]"
           />
@@ -1252,7 +1254,7 @@ const TournamentDetailsPage = ({ tournament, onNavigateBack }) => {
                         {tournament.entryFee}
                       </p>
                       <div className="ml-2 text-left">
-                        <p className="text-[10px] sm:text-xs font-bold text-green-500">68% Off</p>
+                        <p className="text-[10px] sm:text-xs font-bold text-green-500">76% Off</p>
                         <p className="text-[10px] sm:text-xs font-normal text-red-500 line-through">999/-</p>
                       </div>
                     </div>
@@ -1441,11 +1443,16 @@ const App = () => {
       `}</style>
       <div className="bg-zinc-950 font-sans text-white w-screen h-screen overflow-hidden relative">
         <div className="absolute inset-0 z-0">
-          <img
-            src={homeBg}
+          {currentPage === "home" ? <img
+            src={"https://res.cloudinary.com/mayushmaan/image/upload/v1759388353/bg_tyyagp.png"}
             alt="background"
             className="w-full h-full object-cover opacity-20"
-          />
+          /> :
+            <img
+              src={"https://res.cloudinary.com/mayushmaan/image/upload/v1759388768/bgmi_hfybws.png"}
+              alt="background"
+              className="w-full h-full object-cover opacity-20"
+            />}
         </div>
 
         <div className="relative z-10 flex flex-col h-screen">
