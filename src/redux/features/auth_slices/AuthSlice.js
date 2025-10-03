@@ -110,6 +110,7 @@ export const logoutUser = createAsyncThunk(
       return true;
     } catch (err) {
       const message = err.response?.data?.message || "Logout failed";
+      if (message === "jwt expired") localStorage.clear();
       toast.error(message);
       return rejectWithValue(message);
     }
