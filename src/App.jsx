@@ -80,6 +80,7 @@ import TestPayment from "./components/TestPayment";
 import { ForgotPassword } from "./prvp/forgotPassword";
 import TeamLounge from "./components/homepage/Home/TeamLounge";
 import { useSelector } from "react-redux";
+import TournamentDetails from "./components/homepage/Home/TournamentDetails";
 
 const App = () => {
   const [token, setToken] = useState(null);
@@ -104,6 +105,10 @@ const App = () => {
         <Route
           path="/HomePage"
           element={token ? <HomePage /> : <Navigate to="/" />}
+        />
+        <Route
+          path="/TournamentDetails"
+          element={token ? <TournamentDetails /> : <Navigate to="/" />}
         />
         <Route path="/LoginViaPhone" element={<LoginViaPhone />} />
         <Route path="/LoginViaPhoneOTP" element={<LoginViaPhoneOTP />} />

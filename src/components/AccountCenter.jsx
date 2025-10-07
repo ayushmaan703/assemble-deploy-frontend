@@ -3,7 +3,14 @@ import UpperNav from "./ui/nav/UpperNav";
 import { Sidebar } from "./ui/Sidebar/Sidebar";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getUserData, logoutUser } from "../redux/features/auth_slices/AuthSlice";
+import {
+  getUserData,
+  logoutUser,
+  updateImage,
+  updateUserDetails,
+  updateUserName,
+  updateUserPassword
+} from "../redux/features/auth_slices/AuthSlice";
 //dont remove these 4 imports they are being used dynamically 
 import { getBgmiGameData, updateBgmiGameData } from "../redux/features/gaming_slices/bgmiSlice";
 import { getCodmGameData, updateCodmGameData } from "../redux/features/gaming_slices/codmSlice";
@@ -207,6 +214,7 @@ const AccountCenter = () => {
   const [selectedGames, setSelectedGames] = useState([]);
   const [savedGames, setSavedGames] = useState([]);
   const [isGameSelectOpen, setIsGameSelectOpen] = useState(false);
+  const [updatedImage, setUpdateImage] = useState();
 
   const [passwordValidity, setPasswordValidity] = useState({
     length: false,
@@ -425,6 +433,7 @@ const AccountCenter = () => {
 
   const handleProfileImageChange = (e) => {
     const file = e.target.files[0];
+    setUpdateImage(file)
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
@@ -434,6 +443,11 @@ const AccountCenter = () => {
       reader.readAsDataURL(file);
     }
   };
+
+  const updateProfileImage = async () => {
+    const file = updatedImage
+    await dispatch(updateImage({ file }))
+  }
 
   const handleSectionClick = (section) => {
     setActiveSection(section);
@@ -508,7 +522,7 @@ const AccountCenter = () => {
     }
   };
 
-  const handleSave = (isChanged, validationFields, type) => {
+  const handleSave = (isChanged, validationFields, type, subType) => {
     if (isChanged) {
       if (validateForm(validationFields)) {
         setInitialFormData(formData);
@@ -551,7 +565,50 @@ const AccountCenter = () => {
               }
               await dispatch(updateValorantGameData(data3))
               break;
-            case "user": break;
+            case "user":
+              let data4 = {}
+              if (subType == "basicInfo") {
+                data4 = {
+                  fullName: formData[validationFields[0]],
+                  gender: formData[validationFields[1]],
+                  age: formData[validationFields[2]],
+                  phone: formData[validationFields[3]],
+                }
+              }
+              if (subType == "address") {
+                data4 = {
+                  country: formData[validationFields[0]],
+                  state: formData[validationFields[1]],
+                  pincode: formData[validationFields[2]],
+                  city: formData[validationFields[3]],
+                  tagline: formData[validationFields[4]],
+                }
+              }
+              if (subType == "education") {
+                data4 = {
+                  highestEducation: formData[validationFields[0]],
+                  institutionName: formData[validationFields[1]],
+                  course: formData[validationFields[2]],
+                  startingYear: formData[validationFields[3]],
+                  endingYear: formData[validationFields[4]],
+                  eduState: formData[validationFields[5]],
+                  eduPinCode: formData[validationFields[6]],
+                }
+              }
+              await dispatch(updateUserDetails(data4))
+              break;
+            case "password":
+              const data5 = {
+                newPassword: formData[validationFields[1]],
+              }
+              await dispatch(updateUserPassword(data5))
+              break;
+            case "userName":
+              const data6 = {
+                userName: formData[validationFields[0]],
+              }
+              await dispatch(updateUserName(data6))
+              break;
             default: break
           }
         }
@@ -665,10 +722,6 @@ const AccountCenter = () => {
     </div>
   );
 
-  const handleCancelUsername = () => {
-    setFormData((prev) => ({ ...prev, username: initialFormData.username }));
-  };
-
   const isBasicInfoChanged =
     formData.fullName !== initialFormData.fullName ||
     formData.gender !== initialFormData.gender ||
@@ -757,6 +810,7 @@ const AccountCenter = () => {
   };
 
   const renderMobileContent = (img) => {
+
     const sections = {
       "Account Settings": {
         items: [
@@ -930,7 +984,7 @@ const AccountCenter = () => {
                         name="phoneNumber"
                         label="Phone Number"
                         type="tel"
-                        value={formData?.phone || ""}
+                        value={formData?.phoneNumber || ""}
                         onChange={handleInputChange}
                         error={errors.phoneNumber}
                       />{" "}
@@ -943,7 +997,7 @@ const AccountCenter = () => {
                             "gender",
                             "age",
                             "phoneNumber",
-                          ], "user")
+                          ], "user", "basicInfo")
                         }
                         className="w-full bg-green-500 text-white py-3 px-6 rounded-xl hover:bg-green-600 transition-colors font-medium mt-4"
                       >
@@ -988,15 +1042,15 @@ const AccountCenter = () => {
                           name="pinCode"
                           label="PIN Code"
                           type="number"
-                          value={formData?.pincode || ""}
+                          value={formData?.pinCode || ""}
                           onChange={handleInputChange}
                           error={errors.pinCode}
                         />{" "}
                       </div>{" "}
                       <FloatingLabelInput
                         name="addressLine"
-                        label="Address Line"
-                        value={formData?.city || ""}
+                        label="City"
+                        value={formData?.addressLine || ""}
                         onChange={handleInputChange}
                         error={errors.addressLine}
                       />{" "}
@@ -1016,7 +1070,8 @@ const AccountCenter = () => {
                             "state",
                             "pinCode",
                             "addressLine",
-                          ], "user")
+                            "tagline",
+                          ], "user", "address")
                         }
                         className="w-full bg-green-500 text-white py-3 px-6 rounded-xl hover:bg-green-600 transition-colors font-medium mt-4"
                       >
@@ -1138,7 +1193,7 @@ const AccountCenter = () => {
                             "endingYear",
                             "educationState",
                             "educationPinCode",
-                          ], "user")
+                          ], "user", "education")
                         }
                         className="w-full bg-green-500 text-white py-3 px-6 rounded-xl hover:bg-green-600 transition-colors font-medium mt-4"
                       >
@@ -1711,7 +1766,7 @@ const AccountCenter = () => {
                       </p>{" "}
                     </div>{" "}
                     <div className="flex gap-4 mt-auto">
-                      {" "}
+                      {/* {" "}
                       <button
                         onClick={handleCancelUsername}
                         className={`bg-black text-white py-3 px-6 rounded-xl border border-white hover:bg-gray-800 transition-colors font-medium ${isUsernameChanged ? "flex-1" : "w-full"
@@ -1719,11 +1774,11 @@ const AccountCenter = () => {
                       >
                         {" "}
                         Cancel{" "}
-                      </button>{" "}
+                      </button>{" "} */}
                       {isUsernameChanged && (
                         <button
                           onClick={() =>
-                            handleSave(isUsernameChanged, ["username"], "user")
+                            handleSave(isUsernameChanged, ["username"], "userName")
                           }
                           className="flex-1 bg-green-500 text-white py-3 px-6 rounded-xl hover:bg-green-600 transition-colors font-medium"
                         >
@@ -1807,8 +1862,9 @@ const AccountCenter = () => {
                       </button>{" "}
                       {isProfilePictureChanged && (
                         <button
-                          onClick={() =>
-                            handleSave(isProfilePictureChanged, [], "user")
+                          onClick={() => (
+                            handleSave(isProfilePictureChanged, []),
+                            updateProfileImage())
                           }
                           className="bg-green-500 text-white py-3 px-6 rounded-xl hover:bg-green-600 transition-colors font-medium"
                         >
@@ -1877,7 +1933,7 @@ const AccountCenter = () => {
                           handleSave(isPasswordChanged, [
                             "newPassword",
                             "confirmPassword",
-                          ], "user")
+                          ], "password")
                         }
                         className="w-full bg-green-500 text-white py-3 px-6 rounded-xl hover:bg-green-600 transition-colors font-medium mt-auto"
                       >
@@ -1928,10 +1984,10 @@ const AccountCenter = () => {
       setFormData((prev) => ({ ...prev, email: user?.email }));
       setFormData((prev) => ({ ...prev, gender: user?.gender }));
       setFormData((prev) => ({ ...prev, age: user.age || "0" }));
-      setFormData((prev) => ({ ...prev, phone: user?.phone || "0000000000" }));
-      setFormData((prev) => ({ ...prev, country: user?.phone || "0000000000" }));
+      setFormData((prev) => ({ ...prev, phoneNumber: user?.phone || "0" }));
+      setFormData((prev) => ({ ...prev, country: user?.country || "xyz" }));
       setFormData((prev) => ({ ...prev, state: user?.state || "xyz" }));
-      setFormData((prev) => ({ ...prev, pincode: user?.pinCode || "000000" }));
+      setFormData((prev) => ({ ...prev, pinCode: user?.pinCode || "0" }));
       setFormData((prev) => ({ ...prev, city: user?.city || "xyz" }));
       setFormData((prev) => ({ ...prev, tagline: user?.tagline || "xyz" }));
       setFormData((prev) => ({ ...prev, higherEducation: user?.education?.highestEducation || "xyz" }));
@@ -1946,7 +2002,7 @@ const AccountCenter = () => {
       setFormData((prev) => ({ ...prev, gamingServer: user?.gamingServer || "asia" }));
     }
   }, [dispatch, id, activeSection, selectedItem]);
-  
+
   const gameFunctions = {
     Bgmi: getBgmiGameData,
     Codm: getCodmGameData,
@@ -1958,7 +2014,7 @@ const AccountCenter = () => {
       await Promise.all(
         selectedGames.map((game) => {
           const gameKey = gamesToSend[game];
-           const func = gameFunctions[gameKey];
+          const func = gameFunctions[gameKey];
           if (func) {
             return dispatch(func({ userId: id }));
           }
@@ -2558,8 +2614,8 @@ const AccountCenter = () => {
                             <FloatingLabelInput
                               name="phoneNumber"
                               label="Phone Number"
-                              type="tel"
-                              value={formData?.phone || ""}
+                              type="number"
+                              value={formData?.phoneNumber || ""}
                               onChange={handleInputChange}
                               error={errors.phoneNumber}
                             />
@@ -2572,7 +2628,7 @@ const AccountCenter = () => {
                                   "gender",
                                   "age",
                                   "phoneNumber",
-                                ], "user")
+                                ], "user", "basicInfo")
                               }
                               className="w-full bg-green-500 text-white py-3 px-6 rounded-xl hover:bg-green-600 transition-colors font-medium mt-4"
                             >
@@ -2612,7 +2668,7 @@ const AccountCenter = () => {
                                 name="pinCode"
                                 label="PIN Code"
                                 type="number"
-                                value={formData?.pincode || ""}
+                                value={formData?.pinCode || ""}
                                 onChange={handleInputChange}
                                 error={errors.pinCode}
                               />
@@ -2640,7 +2696,8 @@ const AccountCenter = () => {
                                   "state",
                                   "pinCode",
                                   "addressLine",
-                                ], "user")
+                                  "tagline",
+                                ], "user", "address")
                               }
                               className="w-full bg-green-500 text-white py-3 px-6 rounded-xl hover:bg-green-600 transition-colors font-medium mt-4"
                             >
@@ -2749,7 +2806,7 @@ const AccountCenter = () => {
                                   "endingYear",
                                   "educationState",
                                   "educationPinCode",
-                                ], "user")
+                                ], "user", "education")
                               }
                               className="w-full bg-green-500 text-white py-3 px-6 rounded-xl hover:bg-green-600 transition-colors font-medium mt-4"
                             >
@@ -3266,17 +3323,17 @@ const AccountCenter = () => {
                             </p>
                           </div>
                           <div className="flex gap-4 mt-auto">
-                            <button
+                            {/* <button
                               onClick={handleCancelUsername}
                               className={`bg-black text-white py-3 px-6 rounded-xl border border-white hover:bg-gray-800 transition-colors font-medium ${isUsernameChanged ? "flex-1" : "w-full"
                                 }`}
                             >
                               Cancel
-                            </button>
+                            </button> */}
                             {isUsernameChanged && (
                               <button
                                 onClick={() =>
-                                  handleSave(isUsernameChanged, ["username"], "user")
+                                  handleSave(isUsernameChanged, ["username"], "userName")
                                 }
                                 className="flex-1 bg-green-500 text-white py-3 px-6 rounded-xl hover:bg-green-600 transition-colors font-medium"
                               >
@@ -3350,7 +3407,9 @@ const AccountCenter = () => {
                             {isProfilePictureChanged && (
                               <button
                                 onClick={() =>
-                                  handleSave(isProfilePictureChanged, [], "user")
+                                (handleSave(isProfilePictureChanged, [], "profilePic"),
+                                  updateProfileImage()
+                                )
                                 }
                                 className="bg-green-500 text-white py-3 px-6 rounded-xl hover:bg-green-600 transition-colors font-medium"
                               >
@@ -3412,7 +3471,7 @@ const AccountCenter = () => {
                                 handleSave(isPasswordChanged, [
                                   "newPassword",
                                   "confirmPassword",
-                                ], "user")
+                                ], "password")
                               }
                               className="w-full bg-green-500 text-white py-3 px-6 rounded-xl hover:bg-green-600 transition-colors font-medium mt-auto"
                             >
@@ -3488,7 +3547,7 @@ const AccountCenter = () => {
               className="overflow-y-auto"
               style={{ height: "calc(100vh - 80px)" }}
             >
-              {renderMobileContent(user?.avatarUrl)}
+              {renderMobileContent(user.avatarUrl)}
             </div>
           </div>
         </div>

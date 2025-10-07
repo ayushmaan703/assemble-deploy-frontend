@@ -5,7 +5,7 @@ import { jwtDecode } from "jwt-decode";
 
 const initialAccessToken = localStorage.getItem("accessToken");
 
-const getUserFromToken = (token) => {
+export const getUserFromToken = (token) => {
   try {
     const decoded = jwtDecode(token);
     return decoded;
@@ -110,6 +110,7 @@ export const logoutUser = createAsyncThunk(
       return true;
     } catch (err) {
       const message = err.response?.data?.message || "Logout failed";
+      if (message === "jwt expired") localStorage.removeItem("accessToken");
       toast.error(message);
       return rejectWithValue(message);
     }
@@ -283,6 +284,62 @@ export const uploadImage = createAsyncThunk(
   }
 );
 
+export const updateImage = createAsyncThunk("updateImage", async ({ file }) => {
+  console.log({ file });
+  console.lo("hle");
+
+  try {
+    const res = await axiosInstance.post(
+      "/image/updateImage",
+      { file },
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    );
+    console.log(res);
+  } catch (error) {
+    // toast.error(error?.response?.data?.message);
+    throw error;
+  }
+});
+
+export const updateUserDetails = createAsyncThunk(
+  "updateUserDetails",
+  async (data) => {
+    try {
+      const res = await axiosInstance.post("/user/updateUserDetails", data);
+    } catch (error) {
+      toast.error("Error Updataing Details");
+      throw error;
+    }
+  }
+);
+
+export const updateUserPassword = createAsyncThunk(
+  "updateUserPassword",
+  async (data) => {
+    try {
+      const res = await axiosInstance.post("/user/updatePassword", data);
+    } catch (error) {
+      toast.error("Error Updataing Details");
+      throw error;
+    }
+  }
+);
+
+export const updateUserName = createAsyncThunk(
+  "updateUserName",
+  async (data) => {
+    try {
+      const res = await axiosInstance.post("/user/updateUserName", data);
+    } catch (error) {
+      toast.error("Error Updataing Details");
+      throw error;
+    }
+  }
+);
 const authSlice = createSlice({
   name: "auth",
   initialState: {
